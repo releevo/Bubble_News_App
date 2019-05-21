@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Add Story</h2>
+    <label for="">Title</label>
+    <input class="story-title"type="text" placeholder="What's this about?">
+    <label for="">Topics</label>
+    <div class="topics-container">
+        <div>Politics</div>
+        <div>Sport</div>
+        <div>Science</div>
+        <div>Culture</div>
+        <div>Environment</div>
+        <div>Entertainment</div>
+        <div>Economy</div>
+        <div>Society</div>
+    </div>
+
+    <label for="">Article</label>
+    <input class="url-or-keyword" type="text" placeholder="URL or search Google">
+    <form action="">
+        <button>Preview</button>
+    </form>
+    
+    <form action="">
+        <button class="google-news-btn">Google News</button>
+    </form>
+    
+    <div class="news-container"></div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+
+        var getUrlOrKeyword = document.querySelector('.url-or-keyword')
+        var setNewsContainer = document.querySelector('.news-container')
+        var searchGoogleNews = document.querySelector('.google-news-btn')
+
+        var handleSearchGoogleNews = function(event) {
+            event.preventDefault()
+            
+            var options = {
+                url: `https://newsapi.org/v2/everything?q=${getUrlOrKeyword.value}&apiKey=cf309649c7dd4427b754becfef57272c`,
+                method: 'get'
+            }
+
+            var handleDone = function(res) {
+                // array
+                for(let i = 0; i < res.articles.length; i++) {
+                    var div = document.createElement('div')
+                    setNewsContainer.append(div)
+                    div.innerHTML = 
+                    `<h3>${res.articles[i].title}</h3>
+                    <p>${res.articles[i].description}</p>
+                    <img src="${res.articles[i].urlToImage}">
+                    <button class="choose-btn">Choose</button>`
+
+                    //choose-btn eventlister goes here
+
+                }
+
+            }
+
+            $.ajax(options).done(handleDone)
+        }
+    
+        searchGoogleNews.addEventListener('click', handleSearchGoogleNews);
+    </script>
+</body>
+</html>
