@@ -16,10 +16,49 @@ helpers do
 
 end
 
+# signup
+
+get '/signup' do
+  erb :signup
+end
+
+# login
+
+get '/login' do
+  erb :login
+end
+
+# dashboard
+
+get '/users/:id' do
+  erb :user
+end
+
+# homepage
 
 get '/' do
   erb :index
 end
+
+# add story
+
+get '/new' do
+  erb :new
+end
+
+# view story
+
+get '/stories/:id' do
+  erb :show
+end
+
+# complete story
+
+get '/stories/:id/edit' do
+  erb :edit
+end
+
+
 
 
 
