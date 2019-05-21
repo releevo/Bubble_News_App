@@ -3,6 +3,7 @@ create database bubble_news_app;
 create table users(
     id SERIAL PRIMARY KEY,
     display_name VARCHAR(500) NOT NULL,
+    avatar TEXT,
     email VARCHAR(500) NOT NULL,
     password_digest VARCHAR(500) NOT NULL
 );
