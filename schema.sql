@@ -40,6 +40,7 @@ create table articles(
     id SERIAL PRIMARY KEY,
     title VARCHAR(500),
     article_url TEXT,
+    article_description TEXT,
     image_url TEXT,
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -61,4 +62,14 @@ create table votes(
     article_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE CASCADE
+);
+
+create table notifications(
+    id SERIAL PRIMARY KEY,
+    creator_id INTEGER,
+    contributor_id INTEGER,
+    story_id INTEGER,
+    notification_type VARCHAR(500),
+    seen BOOLEAN,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
