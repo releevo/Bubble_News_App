@@ -7,10 +7,32 @@
 </head>
 <body>
 
-<%# <% if logged_in? %> %>
-
+<%# <% if logged_in? %>
+  <header class= "container">
+    <div class = "profile">
+      <div><img src="http://placekitten.com/80/80" alt=""></div>
+      <div>Kitten</div>
+    </div>
+    <div class = "heading"><h1>Bubbles</h1></div>
+    <div class = "navigation">
+      <div> <a href="">Add Story</a></div>
+      <div class = "notification">
+        <div class="invite-number"><a href="">3</a></div>
+        <div class="invitation"><a href="">Invitations</a></div>
+      </div>
+      <%# <% if loggen_in? %> 
+        <%# <form action="/session" method="post">
+          <input type="hidden" name="_method" value="delete"> %>
+        
+          <button class="sign-out">Sign Out</button>
+        <%# </form> %>
+        <%# <% end %>
+    </div>
+  </header>
+        
 
   <%= yield %>
 
+  <footer></footer>
 </body>
 </html>
