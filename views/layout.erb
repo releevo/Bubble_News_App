@@ -10,7 +10,7 @@
   <header>
     <% if logged_in? %>
     <div class="profile">
-      <img class="avatar" src="<%= current_user.avatar %>" alt="">
+      <img class="avatar" src="<%= current_user.avatar.url %>" alt="">
       <span><%= current_user.display_name %></span>
     </div>
     <% end %>
