@@ -2,9 +2,17 @@
     box-sizing: border-box;
 }
 
-.container {
+/* Global Styles - applies to all elements on all pages */
+
+.avatar {
+    border-radius: 50%;
+}
+
+/* Header & Navigation */
+
+header {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .profile {
@@ -13,24 +21,26 @@
     text-align: center;
 }
 
-img {
-    border-radius: 50%;
-}
-
-.heading {
-    width: 70%;
-}
-
-h1 {
+header h1 {
     text-decoration: underline;
     font-size: 4em;
     margin: 10px;
 }
 
-.navigation {
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav {
     display: block;
     width: 20%;
     text-align: right;
+    margin-left: auto;
+}
+
+.nav li {
+    list-style-type: none;
 }
 
 .notification {
@@ -38,16 +48,14 @@ h1 {
     justify-content: flex-end;
 }
 
-.invitation {
-    padding-left: 10px;
-}
-
-.invite-number {
+.notification-count {
     background-color: lightgrey;
+    border: 1px solid grey;
     border-radius: 50%;
+    margin-right: 0.5em;
 }
 
-.sign-out {
+.logout {
     background: none;
 	color: black;
 	border: none;
@@ -55,12 +63,6 @@ h1 {
     outline: none;
     font: inherit;
 }
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
 
 .topics-container {
     margin: 10px 0 10px 0; 
