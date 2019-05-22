@@ -7,31 +7,48 @@
 </head>
 <body>
 
-<%# <% if logged_in? %>
-  <header class= "container">
-    <div class = "profile">
-      <div><img src="http://placekitten.com/80/80" alt=""></div>
-      <div>Kitten</div>
+  <header>
+    <% if logged_in? %>
+    <div class="profile">
+      <img class="avatar" src="<%= current_user.avatar %>" alt="">
+      <span><%= current_user.display_name %></span>
     </div>
-    <div class = "heading"><h1>Bubbles</h1></div>
-    <div class = "navigation">
-      <div> <a href="">Add Story</a></div>
-      <div class = "notification">
-        <div class="invite-number"><a href="">3</a></div>
-        <div class="invitation"><a href="">Invitations</a></div>
-        <%# /user/<%=current_user.id - the links for above%> 
-      </div>
-      <%# <% if loggen_in? %> 
-        <%# <form action="/session" method="post">
-          <input type="hidden" name="_method" value="delete"> %>
-        
-          <button class="sign-out">Sign Out</button>
-        <%# </form> %>
-        <%# <% end %>
-    </div>
+    <% end %>
+
+    <h1>
+      <a href="/">Bubbles</a>
+    </h1>
+
+    <% if logged_in? %>
+    <ul class="nav">
+      <li>
+        <a href="/new">Add Story</a
+      ></li>
+      <li class="notification">
+        <a href="/user/<%= current_user.id %>">
+          <div class="notification-count"><a href=""><%= Notification.where(receiver_id: current_user.id).count %></div>
+          <div class="invitation">Invitations</div>
+        </a>
+      </li>
+      <li>
+        <form action="/session" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button class="logout">Log Out</button>
+        </form>
+      </li>
+    </ul>
+    <% else %>
+    <ul class="nav">
+      <li>
+        <a href="/login">Login</a>
+      </li>
+      <li>
+        <a href="/signup">Sign Up</a>
+      </li>
+    </ul>
+    <% end %>
   </header>
         
-
   <%= yield %>
 
   <footer></footer>
