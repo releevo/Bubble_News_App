@@ -1,0 +1,23 @@
+<header>
+  <h1>Invitations</h1>
+</header>
+
+<main class="all-invitations">
+<% @notifications.each do |notice| %>
+  <div class="invite-card">
+    <img src="" alt="" class="host-avatar">
+    <h2 class="story-title"><%= notice.sender_story.title%></h2>
+    <h2 class="article-title"><%= notice.sender_article.title%></h2>
+    <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time">3hrs ago</span>
+    <form action="/stories/<%= notice.sender_story.id%>/edit" method="get">
+    <button>Accept</button>
+    </form>
+    <form action="/notifications/<%= notice.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>Ignore</button>
+    </form>
+  </div>
+  <% end %>
+</main>
+
+
