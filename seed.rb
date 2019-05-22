@@ -56,4 +56,11 @@ test_users.each do |test_user|
   stories_article.story_id = story.id
   stories_article.original_side = true
   stories_article.save
+
+  discussion = Discussion.new
+  discussion.content = 'Lorem ipsum dolor sit amet, consectetur adipisicingelit, sed do eiusmod tempor incididunt ut labore et.'
+  discussion.user_id = user.id
+  discussion.story_id = story.id
+  discussion.save
 end
+  
