@@ -79,9 +79,13 @@ header a {
     width: 400px;
 }
 
-.article-container {
+.article-container, .article-one-container {
     display: flex;
     justify-content: center;
+}
+
+.article-one-container img {
+    width: 400px;
 }
 
 .selectedTopics {
