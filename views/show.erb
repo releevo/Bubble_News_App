@@ -2,7 +2,14 @@
 
   <header>
     <h1><%= @story.title %></h1>
-    <span>Posted by @story.creator_id | 21 May | Perspective by Milo</span>
+    <span>
+    Posted by <%= @story_creator %> | DATE FEATURE PENDING |
+    <% if @article_original != @article_perspective %>
+    Perspective by <%= @perspective_user.display_name %>
+    <% else %>
+    <em>Needs perspective</em>
+    <% end %>
+    </span>
   </header>
 
   <main>
@@ -11,31 +18,37 @@
       <div class="pick-side">This</div>
       <div class="pick-side">That</div>
         <article class="story">
-          <h1 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed</h1>
-          <img src="" alt="" class="story-thumb">
+          <h2 class="title"><%= @article_original.title %></h2>
+          <img src="@article_original.image_url" alt="" class="story-thumb">
           <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
         </article>
-    
+
         <article class="story">
-          <h1 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed</h1>
+        <% if @article_original != @article_perspective %>
+          <h2 class="title">@article_perspective.title</h2>
           <img src="" alt="" class="story-thumb">
           <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+          <button class="article-btn">Upvote</button>
+          <button class="article-btn">View Perspective</button>
+        <% else %>
+          <h2 class="title">This article needs your perspective.</h2>
+          <button class="article-btn">Add Article</button>
+        <% end %>
         </article>
-        <button class="article-btn">Upvote</button>
-        <button class="article-btn">View Perspective</button>
     </div>
 
     <h2>Discussions</h2>
     <div class="comments">
+    <% @discussions.each  do |discussion| %>
       <div class="comment">
-        <img src="" alt="" class="user-avatar">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicingelit, sed do eiusmod tempor incididunt ut labore et </p>
-        <span class="comment-data">Alan | 3hrs ago</span>
+        <img src="<%= User.find(discussion.user_id).avatar %>" alt="" class="user-avatar">
+        <p><%= discussion.content %></p>
+        <span class="comment-data"><%= User.find(discussion.user_id).display_name %> | TIME SINCE COMMENT PENDING</span>
       </div>
-      <form action="" class="add-comment">
-        <textarea name="" id="" cols="30" rows="10">
-
-        </textarea>
+    <% end %>
+      <form class="add-comment" action="/discussions" method="post">
+        <input type="hidden" name="story_id" value="<%= @story.id %>">
+        <textarea name="content"></textarea>
         <button>Submit</button>
       </form>
     </div> 
