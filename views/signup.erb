@@ -1,21 +1,22 @@
-<header>
-  <h1>Sign Up</h1>
-</header>
+<div class="container-signup">
+  <header>
+    <h1>Sign Up</h1>
+  </header>
 
-<main>
-  <form action="/signup" class="signup" method="post">
-    <label for="">Display Name: </label>
-    <input type="text" name="display_name">
-    <label for="">Avatar: </label>
-    <input type="file" name="avatar">
-    <label for="">Email: </label>
-    <input type="text" name="email">
-    <label for="">Password: </label>
-    <input type="password" name="password">
-    <button>Join Now</button>
-  </form>
-</main>
-
+  <main>
+    <form action="/signup" class="signup" method="post" enctype="multipart/form-data">
+      <label for="">Display Name: </label>
+      <input type="text" name="display_name">
+      <label for="">Avatar: </label>
+      <input type="file" name="avatar">
+      <label for="">Email: </label>
+      <input type="text" name="email">
+      <label for="">Password: </label>
+      <input type="password" name="password">
+      <button>Join Now</button>
+    </form>
+  </main>
+</div>
 <%# need to add .url in layout to avatar current_user.avatar %>
 <%# Can i smaple out ten or is that ten new %>
 <%# test notifications from start to finish %>
