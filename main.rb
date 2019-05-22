@@ -26,10 +26,32 @@ enable :sessions
 helpers do
 
   def current_user
+    User.find_by(id: session[:user_id])
   end
 
   def logged_in?
     !!current_user
   end
 
+end
+
+# Create Session
+
+post '/session' do
+  user = User.find_by(email: params[:email])
+  if user && user.authenticate(params[:password])
+    # you are good
+    session[:user_id] = user.id
+    redirect '/'
+  else
+    # stay there
+    erb :login
+  end
+end
+
+# Delete Session
+
+delete "/session" do
+  session[:user_id] = nil
+  redirect '/login'
 end
