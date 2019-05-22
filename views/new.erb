@@ -71,19 +71,26 @@
                     </div>`
 
                     // choose-btn eventlister goes here
-                    // var chooseArticleButtons = document.querySelectorAll('.choose-btn')
-                    // chooseArticleButtons.forEach(chooseArticleButton => {
-                    //     chooseArticleButton.addEventListener('click', function() {
-                    //         $.ajax({
-                    //             url: '/articles',
-                    //             method: 'post',
-                    //             data: {
-                    //                 story_title: getStoryTitle.value
+                    getTopics.forEach(topic => {
+                        if() {
+                            
+                        }
+                    })
+
+
+                    var chooseArticleButtons = document.querySelectorAll('.choose-btn')
+                    chooseArticleButtons.forEach(chooseArticleButton => {
+                        chooseArticleButton.addEventListener('click', function() {
+                            $.ajax({
+                                url: '/articles',
+                                method: 'post',
+                                data: {
+                                    story_title: getStoryTitle.value
                                     
-                    //             }
-                    //         })
-                    //     })
-                    // })
+                                }
+                            })
+                        })
+                    })
                 }
 
             }
