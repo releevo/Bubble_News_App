@@ -16,7 +16,6 @@ post '/new' do
   topic.story_id = story.id
   topic.save
 
-
   #these params need to be updated as per the URL search Alan
   article = Article.new
   article.title = params[:article_title]
@@ -26,7 +25,6 @@ post '/new' do
   # article.user_id = current_user.id
   article.save
 
-  
   stories_article = StoriesArticle.new
   stories_article.article_id = article.id
   stories_article.story_id = story.id
