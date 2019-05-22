@@ -60,3 +60,16 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.news-container img {
+    width: 400px;
+}
+
+.article-container {
+    display: flex;
+    justify-content: center;
+}
+
+.selectedTopics {
+    background-color: lightgreen;
+}
