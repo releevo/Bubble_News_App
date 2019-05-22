@@ -13,7 +13,7 @@ end
 
 post '/discussions' do
   @discussion = Discussion.new
-  @discussion.user_id = 3
+  @discussion.user_id = current_user.id
   @discussion.content = params[:content]
   @discussion.story_id = params[:story_id]
   @discussion.save

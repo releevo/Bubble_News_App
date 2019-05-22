@@ -50,11 +50,13 @@
         <span class="comment-data"><%= User.find(discussion.user_id).display_name %> | TIME SINCE COMMENT PENDING</span>
       </div>
     <% end %>
+      <% if logged_in? %>
       <form class="add-comment" action="/discussions" method="post">
         <input type="hidden" name="story_id" value="<%= @story.id %>">
         <textarea name="content"></textarea>
         <button>Submit</button>
       </form>
+      <% end %>
     </div> 
 
   </main>
