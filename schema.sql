@@ -67,10 +67,10 @@ create table votes(
 
 create table notifications(
     id SERIAL PRIMARY KEY,
-    creator_id INTEGER,
-    contributor_id INTEGER,
+    sender_id INTEGER,
+    receiver_id INTEGER,
     story_id INTEGER,
     notification_type VARCHAR(500),
     seen BOOLEAN,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE
 );

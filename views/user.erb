@@ -2,7 +2,8 @@
   <h1>Invitations</h1>
 </header>
 
-<main>
+<main class="all-invitations">
+<% @notifications.each do |notice| %>
   <div class="invite-card">
     <img src="" alt="" class="host-avatar">
     <h2 class="article-title"></h2>
@@ -10,5 +11,6 @@
     <button>Accept</button>
     <button>Ignore</button>
   </div>
+  <% end %>
 </main>
 
