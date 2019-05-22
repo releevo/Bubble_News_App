@@ -36,22 +36,24 @@ post '/new' do
   # stories_article.original_side = true
   # stories_article.save
 
-  notification = Notification.new
-  notification.sender_id = current_user.id
-  topic_selection = Topic.where(name: topic.name)
-  first_notice = topic_selection.sample()
-  notification.receiver_id = first_notice.user_id
-  # @random_topics = Topic.where(name: topic.name)
-  # if @topic.user_id != current_user.id
-  # notification.receiver_id = random_topics.user_id
-  # @topics.user.id #is the user id's from the Topic Table
-  # end
-  notification.story_id = story.id
-  notification.article_id = article.id
-  notification.notification_type = "invite"
-  notification.seen = false
+  10.times do
+    notification = Notification.new
+    notification.sender_id = current_user.id
+    topic_selection = Topic.where(name: topic.name)
+    first_notice = topic_selection.sample
+    if first_notice.user_id != current_user.id
+      notification.receiver_id = first_notice.user_id
+    else 
+      # take another sample
+      first_notice = topic_selection.sample
+    end
+    notification.story_id = story.id
+    notification.article_id = article.id
+    notification.notification_type = "invite"
+    notification.seen = false
 
-  notification.save
+    notification.save
+  end
 
   
   erb :new
