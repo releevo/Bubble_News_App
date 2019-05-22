@@ -12,7 +12,7 @@ create table topics(
     id SERIAL PRIMARY KEY,
     name VARCHAR(500) NOT NULL,
     user_id INTEGER,
-    article_id INTEGER,
+    story_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 

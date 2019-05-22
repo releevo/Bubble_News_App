@@ -60,3 +60,28 @@ a {
     text-decoration: none;
     color: black;
 }
+
+
+.topics-container {
+    margin: 10px 0 10px 0; 
+    display: flex;
+}
+
+.topics-container div {
+    border: 1px solid black;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.news-container img {
+    width: 400px;
+}
+
+.article-container {
+    display: flex;
+    justify-content: center;
+}
+
+.selectedTopics {
+    background-color: lightgreen;
+}
