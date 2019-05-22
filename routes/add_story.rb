@@ -7,15 +7,13 @@ end
 post '/new' do
   story = Story.new
   story.title = params[:story_title]
-  
-  # story.creator_id = current_user.id
+  story.creator_id = current_user.id
   
   story.save
 
   topic = Topic.new
   topic.name = params[:chosen_topics]
-
-  # topic.user_id = current_user.id
+  topic.user_id = current_user.id
 
   topic.story_id = story.id
   topic.save
@@ -27,8 +25,7 @@ post '/new' do
   article.article_url = params[:article_url]
   article.article_description = params[:article_description]
   article.image_url = params[:article_image_url]
-  
-  # article.user_id = current_user.id
+  article.user_id = current_user.id
 
   article.save
 
@@ -38,6 +35,24 @@ post '/new' do
   # stories_article.story_id = story.id
   # stories_article.original_side = true
   # stories_article.save
+
+  notification = Notification.new
+  notification.sender_id = current_user.id
+  topic_selection = Topic.where(name: topic.name)
+  first_notice = topic_selection.sample()
+  notification.receiver_id = first_notice.user_id
+  # @random_topics = Topic.where(name: topic.name)
+  # if @topic.user_id != current_user.id
+  # notification.receiver_id = random_topics.user_id
+  # @topics.user.id #is the user id's from the Topic Table
+  # end
+  notification.story_id = story.id
+  notification.article_id = article.id
+  notification.notification_type = "invite"
+  notification.seen = false
+
+  notification.save
+
   
   erb :new
 end
