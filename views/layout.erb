@@ -25,8 +25,8 @@
         <a href="/new">Add Story</a
       ></li>
       <li class="notification">
-        <a href="/user/<%= current_user.id %>">
-          <div class="notification-count"><a href=""><%= Notification.where(receiver_id: current_user.id).count %></div>
+        <a href="/users/<%= current_user.id %>">
+          <div class="notification-count"><%= Notification.where(receiver_id: current_user.id).count %></div>
           <div class="invitation">Invitations</div>
         </a>
       </li>
