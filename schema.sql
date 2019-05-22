@@ -70,6 +70,7 @@ create table notifications(
     sender_id INTEGER,
     receiver_id INTEGER,
     story_id INTEGER,
+    article_id INTEGER,
     notification_type VARCHAR(500),
     seen BOOLEAN,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE
