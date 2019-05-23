@@ -1,7 +1,3 @@
-<head>
-  <link rel="stylesheet" href="../public/stylesheets/show.css">
-</head>
-
 <div class="container-show">
 
   <header>
@@ -21,13 +17,13 @@
     <div class="story-articles">
       <div class="pick-side">This</div>
       <div class="pick-side">That</div>
-        <article class="story">
+        <article class="original">
           <h2 class="title"><%= @article_original.title %></h2>
-          <img src="@article_original.image_url" alt="" class="story-thumb">
+          <img src="<%= @article_original.image_url %>" alt="" class="story-thumb">
           <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
         </article>
 
-        <article class="story">
+        <article class="perspective hide">
         <% if @article_original != @article_perspective %>
           <h2 class="title">@article_perspective.title</h2>
           <img src="" alt="" class="story-thumb">
@@ -63,3 +59,11 @@
 
 </div>
 
+<script src='/javascripts/show.js'></script>
+
+<style>
+
+.hide {
+  display: none;
+}
+</style>
