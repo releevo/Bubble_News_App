@@ -6,11 +6,14 @@ class Story < ActiveRecord::Base
     Vote.where(story_id: self.id).count
   end
 
-  def article_of_most_votes
-    articles[:id]
-  end
+  # def article_of_most_votes
+  #   articles[:id]
+  # end
   
-  # articles = Article.where(story_id: story.id)
+  
+end
+
+    # articles = Article.where(story_id: story.id)
   #         article = articles.first[:article]
 
 
@@ -22,5 +25,3 @@ class Story < ActiveRecord::Base
     #     }
     #   }
     #   # return key_article
-          
-    end
