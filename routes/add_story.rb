@@ -8,16 +8,14 @@ post '/new' do
   story = Story.new
   story.title = params[:story_title]
   story.creator_id = current_user.id
-  
+  story.time_created = Time.now.strftime("%d/%m/%Y %H:%M")
   story.save
 
   topic = Topic.new
   topic.name = params[:chosen_topics]
   topic.user_id = current_user.id
-
   topic.story_id = story.id
   topic.save
-
 
   #these params need to be updated as per the URL search Alan
   article = Article.new
@@ -26,15 +24,14 @@ post '/new' do
   article.article_description = params[:article_description]
   article.image_url = params[:article_image_url]
   article.user_id = current_user.id
-
   article.save
 
-  
-  # stories_article = StoriesArticle.new
-  # stories_article.article_id = article.id
-  # stories_article.story_id = story.id
-  # stories_article.original_side = true
-  # stories_article.save
+  stories_article = StoriesArticle.new
+  stories_article.article_id = article.id
+  stories_article.story_id = story.id
+  stories_article.original_side = true
+  stories_article.contributor_id = current_user.id
+  stories_article.save
 
   10.times do
     notification = Notification.new
@@ -50,6 +47,12 @@ post '/new' do
     notification.save
   end
 
-  
-  erb :new
+  # erb :index
+  # redirect "/stories/#{story.id}"
+  content_type :json
+  {
+    redirect: true,
+    redirect_url: "/stories/#{story.id}"
+  }.to_json
+
 end

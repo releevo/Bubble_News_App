@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h2>Add Story</h2>
+<div class="container-show"> 
+    <header>
+        <h2>Add Story</h2>
+    </header>
+</div>
+
+<main>
     <label for="">Title</label>
     <input class="story-title"type="text" placeholder="What's this about?">
     
@@ -25,95 +22,93 @@
 
     <label for="">Article</label>
     <input class="url-or-keyword" type="text" placeholder="URL or search Google">
-    
-
     <button>Preview</button>
-    
     <button class="google-news-btn">Google News</button>
     
     <div class="news-container"></div>
+</main>
 
 
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    var getUrlOrKeyword = document.querySelector('.url-or-keyword')
+    var setNewsContainer = document.querySelector('.news-container')
+    var searchGoogleNews = document.querySelector('.google-news-btn')
+    var getStoryTitle = document.querySelector('.story-title')
+    var getTopics = document.querySelectorAll('#topic')
 
 
+    var chosenTopics = ""
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script>
-        var getUrlOrKeyword = document.querySelector('.url-or-keyword')
-        var setNewsContainer = document.querySelector('.news-container')
-        var searchGoogleNews = document.querySelector('.google-news-btn')
-        var getStoryTitle = document.querySelector('.story-title')
-        var getTopics = document.querySelectorAll('#topic')
-
-
-        var chosenTopics = ""
-
-
-        var handleSearchGoogleNews = function(event) {    
-            var options = {
-                url: `https://newsapi.org/v2/everything?q=${getUrlOrKeyword.value}&apiKey=cf309649c7dd4427b754becfef57272c`,
-                method: 'get'
-            }
-
-            var handleDone = function(res) {
-                // array
-                for(let i = 0; i < res.articles.length; i++) {
-                    var div = document.createElement('div')
-                    setNewsContainer.append(div)
-                    div.innerHTML = 
-                    `<div class="article-container"> 
-                        <h3>${res.articles[i].title}</h3>
-                        <div><img class="article-image" src="${res.articles[i].urlToImage}"></div>
-                        <div> 
-                            <p>${res.articles[i].description}</p>
-                            <a class="article-link" href="${res.articles[i].url}" target="_blank">${res.articles[i].url}</a>
-                            <div><button class="choose-btn">Choose</button></div>
-                        </div>
-                    </div>`
-                }
-            }
-
-            $.ajax(options).done(handleDone)
+    var handleSearchGoogleNews = function(event) {    
+        var options = {
+            url: `https://newsapi.org/v2/everything?q=${getUrlOrKeyword.value}&apiKey=cf309649c7dd4427b754becfef57272c`,
+            method: 'get'
         }
 
-        // click anywhere in news-container div
-        var handleChooseArticle = function(event) {
-            if(event.target.classList.contains('choose-btn')) { // find the 'choose' button
-                $.ajax({
-                    url: '/new',
-                    method: 'post',
-                    data: {
-                        story_title: getStoryTitle.value,
-                        chosen_topics: chosenTopics,
-                        article_title: event.target.closest('.article-container').querySelector('h3').textContent,
-                        article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
-                        article_description: event.target.closest('.article-container').querySelector('p').textContent,
-                        article_image_url: event.target.closest('.article-container').querySelector('.article-image').src
+        var handleDone = function(res) {
+            // array
+            for(let i = 0; i < res.articles.length; i++) {
+                var div = document.createElement('div')
+                setNewsContainer.append(div)
+                div.innerHTML = 
+                `<div class="article-container"> 
+                    <h3>${res.articles[i].title}</h3>
+                    <div><img class="article-image" src="${res.articles[i].urlToImage}"></div>
+                    <div> 
+                        <p>${res.articles[i].description}</p>
+                        <a class="article-link" href="${res.articles[i].url}" target="_blank">${res.articles[i].url}</a>
+                        <div><button class="choose-btn">Choose</button></div>
+                    </div>
+                </div>`
+            }
+        }
+
+        $.ajax(options).done(handleDone)
+    }
+
+    // click anywhere in news-container div
+    var handleChooseArticle = function(event) {
+        if(event.target.classList.contains('choose-btn')) { // find the 'choose' button
+            $.ajax({
+                url: '/new',
+                method: 'post',
+                data: {
+                    story_title: getStoryTitle.value,
+                    chosen_topics: chosenTopics,
+                    article_title: event.target.closest('.article-container').querySelector('h3').textContent,
+                    article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
+                    article_description: event.target.closest('.article-container').querySelector('p').textContent,
+                    article_image_url: event.target.closest('.article-container').querySelector('.article-image').src
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.redirect !== undefined && res.redirect) {
+                        window.location.href = res.redirect_url
                     }
-                })
-            }  
-        }
-
-        setNewsContainer.addEventListener('click', handleChooseArticle)
-
-
-        var handleSelectTopics = function (event) {
-            event.target.classList.add('selectedTopics')
-            if(event.target.classList.contains('selectedTopics')) {
-                if(chosenTopics == "") {
-                    chosenTopics = event.target.textContent
-                } else {
-                    chosenTopics = chosenTopics + " " + event.target.textContent
                 }
+            })
+        }  
+    }
+
+    setNewsContainer.addEventListener('click', handleChooseArticle)
+
+
+    var handleSelectTopics = function (event) {
+        event.target.classList.add('selectedTopics')
+        if(event.target.classList.contains('selectedTopics')) {
+            if(chosenTopics == "") {
+                chosenTopics = event.target.textContent
+            } else {
+                chosenTopics = chosenTopics + " " + event.target.textContent
             }
         }
+    }
 
-        getTopics.forEach(function(item) {
-            item.addEventListener('click', handleSelectTopics)
-        })
-    
-        searchGoogleNews.addEventListener('click', handleSearchGoogleNews)
-    </script>
-</body>
-</html>
+    getTopics.forEach(function(item) {
+        item.addEventListener('click', handleSelectTopics)
+    })
+
+    searchGoogleNews.addEventListener('click', handleSearchGoogleNews)
+</script>
