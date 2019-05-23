@@ -29,7 +29,7 @@ post '/new' do
   stories_article.article_id = article.id
   stories_article.story_id = story.id
   stories_article.original_side = true
-  stories_article.contributor_id = current_user.id
+  # stories_article.contributor_id = current_user.id
   stories_article.save
 
   10.times do
