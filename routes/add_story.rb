@@ -39,14 +39,9 @@ post '/new' do
   10.times do
     notification = Notification.new
     notification.sender_id = current_user.id
-    topic_selection = Topic.where(name: topic.name)
+    topic_selection = Topic.where.not(user_id: current_user.id).where(name: topic.name)
     first_notice = topic_selection.sample
-    if first_notice.user_id != current_user.id
-      notification.receiver_id = first_notice.user_id
-    else 
-      # take another sample
-      first_notice = topic_selection.sample
-    end
+    notification.receiver_id = first_notice.user_id
     notification.story_id = story.id
     notification.article_id = article.id
     notification.notification_type = "invite"

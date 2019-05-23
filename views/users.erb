@@ -10,14 +10,39 @@
     <h2 class="article-title"><%= notice.sender_article.title%></h2>
     <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time">3hrs ago</span>
     <form action="/stories/<%= notice.sender_story.id%>/edit" method="get">
-    <button>Accept</button>
+      <button>Accept</button>
     </form>
-    <form action="/notifications/<%= notice.id%>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button>Ignore</button>
+    <form action="/api/notifications/<%= notice.id%>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="users-ignore-button">Ignore</button>
     </form>
   </div>
   <% end %>
 </main>
 
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
 
+<script>
+var ignoreButton = document.querySelector('.users-ignore-button')
+var inviteCard = document.querySelector('.invite-card')
+
+var handleIgnoreClick = function(event) {
+  debugger
+  event.preventDefault();
+  var url = event.target.closest('form').action
+  var toDelete = event.target.closest('.invite-card')
+  $.ajax({
+    url: url
+    method: "delete"
+  }).done(response => {
+    // toDelete.remove()
+  })
+
+}
+
+
+ignoreButton.addEventListener('click', handleIgnoreClick)
+</script>
