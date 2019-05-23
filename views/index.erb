@@ -30,12 +30,15 @@
         <article class="story">
         <h1 class="story-title">
         <%= topic.story_with_most_votes[:title]%></h1>
-        <h1 class="article-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed</h1>
+        <h1 class="article-title"><%=topic.stories.article_related_to_story_with_most_votes[:article_title]%></h1>
         <img src="" alt="" class="story-thumb">
-        <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+        <p class="article-content"><%=topic.stories.article_related_to_story_with_most_votes[:article_description]%></p>
         </article>    
     </div>
     <% end %>
 
     </main>
 </div>
+
+<%# <%=topic.article_related_to_story_with_most_votes[:title]%>
+<%# <%=topic.article_related_to_story_with_most_votes[:article_description]%>
