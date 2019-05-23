@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bubble News App</title>
+  <link rel="stylesheet" href="/stylesheets/reset.css">
   <link rel='stylesheet' href='/stylesheets/main.css'>
+  <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Lato&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -11,7 +15,7 @@
     <% if logged_in? %>
     <div class="profile">
       <img class="avatar" src="<%= current_user.avatar.url %>" alt="">
-      <span><%= current_user.display_name %></span>
+      <span class="display-name"><%= current_user.display_name %></span>
     </div>
     <% end %>
 
@@ -24,10 +28,10 @@
       <li>
         <a href="/new">Add Story</a
       ></li>
-      <li class="notification">
-        <a href="/users/<%= current_user.id %>">
+      <li>
+        <a class="notification" href="/users/<%= current_user.id %>">
           <div class="notification-count"><%= Notification.where(receiver_id: current_user.id).count %></div>
-          <div class="invitation">Invitations</div>
+          <span class="invitation">Invitations</span>
         </a>
       </li>
       <li>
