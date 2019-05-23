@@ -1,20 +1,20 @@
-<div class="container-show">
+<div class="container show">
 
   <header>
     <h1><%= @story.title %></h1>
-    <span>
+    <p class="story-meta">
     Posted by <%= @story_creator %> | <%= @story.time_created %> |
     <% if @article_original != @article_perspective %>
     Perspective by <%= @perspective_user.display_name %>
     <% else %>
     <em>Needs perspective</em>
     <% end %>
-    </span>
+    </p>
   </header>
 
   <main>
   
-    <div class="story-articles">
+    <div class="container story-articles medium">
 
       <div class="pick-side">This</div>
       <div class="pick-side">That</div>
@@ -32,9 +32,12 @@
 
         <article class="story-article perspective hide">
         <% if @article_original != @article_perspective %>
-          <h2 class="title">@article_perspective.title</h2>
+          <h2 class="title"><%= @article_perspective_title %></h2>
           <img src="" alt="" class="story-thumb">
-          <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+          <div class="article-content">
+            <em><%= @article_perspective_author %></em>
+            <%= @article_perspective_content %>
+          </div>
           <span class="vote-count"><%= @votes_perspective %></span>
           <span class="vote-btn" data-article-id="<%= @article_perspective.id %>">👍</span>
         <% else %>
@@ -47,17 +50,20 @@
     </div>
 
     <h2>Discussions</h2>
-    <div class="comments">
+    <div class="container bright comments">
     <% @discussions.each  do |discussion| %>
-      <div class="comment">
-        <img src="<%= User.find(discussion.user_id).avatar %>" alt="" class="avatar">
-        <p><%= discussion.content %></p>
-        <span class="comment-data"><%= User.find(discussion.user_id).display_name %> | <%= discussion.time_created %> </span>
+      <div class="discussion">
+        <div class="profile">
+          <img class="avatar" src="<%= User.find(discussion.user_id).avatar %>" alt="">
+          <span class="display-name"><%= User.find(discussion.user_id).display_name %></span>
+        </div>
+        <p class="content"><%= discussion.content %></p>
       </div>
     <% end %>
       <% if logged_in? %>
       <form class="add-comment" action="/discussions" method="post">
         <input type="hidden" name="story_id" value="<%= @story.id %>">
+        <h3>Add a Comment</h3>
         <textarea name="content"></textarea>
         <button>Submit</button>
       </form>
@@ -69,9 +75,52 @@
 </div>
 
 <style>
+.show header {
+  display: block;
+}
+
+.show main {
+  display: block;
+}
+
+.story-meta {
+  text-align: center;
+  font-size: 0.75em;
+  margin: 0 auto;
+}
+
+.article-content {
+  border-bottom: 1px solid grey;
+  margin-bottom: 0.25em;
+}
+
 .hide {
   display: none;
 }
+
+.pickside {
+  display: flex;
+  justify-content: space-around;
+}
+
+.discussion {
+  display: flex;
+  flex-direction: flex-start;
+  align-items: center;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid grey;
+  margin-bottom: 1em;
+}
+
+.discussion .profile {
+  width: 25%;
+  font-size: 0.75em;
+}
+
+.discussion p {
+  width: 75%;
+}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
