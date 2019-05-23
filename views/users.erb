@@ -8,7 +8,7 @@
     <img src="<%= notice.sender.avatar %>" alt="" class="host-avatar">
     <h2 class="story-title"><%= notice.sender_story.title%></h2>
     <h2 class="article-title"><%= notice.sender_article.title%></h2>
-    <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time">3hrs ago</span>
+    <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time"><%= time_ago_in_words(notice.time_created)%> ago</span>
     <form action="/stories/<%= notice.sender_story.id%>/edit" method="get">
       <button>Accept</button>
     </form>
@@ -41,7 +41,6 @@ var handleIgnoreClick = function(event) {
   })
 
 }
-
 
 ignoreButton.addEventListener('click', handleIgnoreClick)
 </script>
