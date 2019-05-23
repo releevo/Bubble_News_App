@@ -21,7 +21,7 @@ class Topic < ActiveRecord::Base
     end
 
     def article_of_most_votes
-        @last_story[:article_id]
+        articles.count
     end
 
     
