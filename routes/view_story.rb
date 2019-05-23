@@ -1,6 +1,6 @@
 # view story
 
-require 'readability'
+# require 'readability'
 require 'open-uri'
 
 def readability(url)
