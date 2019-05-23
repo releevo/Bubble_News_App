@@ -15,21 +15,25 @@
   <main>
   
     <div class="story-articles">
+
       <div class="pick-side">This</div>
       <div class="pick-side">That</div>
-        <article class="original">
+
+        <article class="story-article original">
           <h2 class="title"><%= @article_original.title %></h2>
           <img src="<%= @article_original.image_url %>" alt="" class="story-thumb">
           <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+          <span class="vote-count"><%= @votes_original %></span>
+          <span class="vote-btn" data-article-id="<%= @article_original.id %>">👍</span>
         </article>
 
-        <article class="perspective hide">
+        <article class="story-article perspective hide">
         <% if @article_original != @article_perspective %>
           <h2 class="title">@article_perspective.title</h2>
           <img src="" alt="" class="story-thumb">
           <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
-          <button class="article-btn">Upvote</button>
-          <button class="article-btn">View Perspective</button>
+          <span class="vote-count"><%= @votes_perspective %></span>
+          <span class="vote-btn" data-article-id="<%= @article_perspective.id %>">👍</span>
         <% else %>
           <h2 class="title">This article needs your perspective.</h2>
           <button class="article-btn">Add Article</button>
@@ -59,11 +63,58 @@
 
 </div>
 
-<script src='/javascripts/show.js'></script>
-
 <style>
-
 .hide {
   display: none;
 }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+  console.log ('show')
+
+  var viewOriginal = document.querySelectorAll('.pick-side')[0]
+  var viewPerspective = document.querySelectorAll('.pick-side')[1]
+  var articleOriginal = document.querySelector('.original')
+  var articlePerspective = document.querySelector('.perspective')
+
+  var handleViewOriginal = event => {
+    articleOriginal.classList.remove('hide')
+    articlePerspective.classList.add('hide')
+  }
+
+  var handleViewPerspective = event => {
+    articleOriginal.classList.add('hide')
+    articlePerspective.classList.remove('hide')
+  }
+
+  viewOriginal.addEventListener('click', handleViewOriginal)
+  viewPerspective.addEventListener('click', handleViewPerspective)
+
+  var storyArticles = document.querySelector('.story-articles')
+
+  // event bubbling and event delegation
+  var handleUpvote = event => {
+    console.log('clicked within article')
+    if (event.target.classList.contains('vote-btn')) {
+      console.log('clicked on vote btn')
+      $.ajax({
+        url: '/api/votes',
+        method: 'post',
+        data: {
+          article_Id: event.target.dataset.articleId
+          // story_Id: event.target.dataset.story_Id
+        }
+      }).done(res => {
+        var storyArticle = event.target.closest('.story-article')
+        var voteCount = storyArticle.querySelector('.vote-count')
+        voteCount.textContent = res.vote_count
+      })
+    }
+  }
+
+  <% if logged_in? %>
+    storyArticles.addEventListener('click', handleUpvote)
+  <% end %>
+
+</script>
