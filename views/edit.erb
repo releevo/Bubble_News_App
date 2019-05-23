@@ -1,49 +1,53 @@
-<h2>Add Perspective</h2>
-<label for="">Title</label>
-<input class="story-title" type="text" value="<%= Story.find_by(id: params[:id]).title %>">
+<div class="container-show">
+    <header>
+        <h2>Add Perspective</h2>
+    </header>
+</div>
+
+<main>
+    <label for="">Title</label>
+    <input class="story-title" type="text" value="<%= Story.find_by(id: params[:id]).title %>">
+            
+    <div class="topics-container">
+        <label for="">Topics</label>
+        <div id="topic">Politics</div>
+        <div id="topic">Sports</div>
+        <div id="topic">Science</div>
+        <div id="topic">Culture</div>
+        <div id="topic">Environment</div>
+        <div id="topic">Entertainment</div>
+        <div id="topic">Economy</div>
+        <div id="topic">Society</div>
+    </div>
+
+    <label for="">Article</label>
+    <input class="url-or-keyword" type="text" placeholder="URL or search Google">
+    <button>Preview</button>
+    <button class="google-news-btn">Google News</button>
         
-<div class="topics-container">
-    <label for="">Topics</label>
-    <div id="topic">Politics</div>
-    <div id="topic">Sports</div>
-    <div id="topic">Science</div>
-    <div id="topic">Culture</div>
-    <div id="topic">Environment</div>
-    <div id="topic">Entertainment</div>
-    <div id="topic">Economy</div>
-    <div id="topic">Society</div>
-</div>
+    <div class="article-one-container">
+        <h3>  
+        <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).title %> 
+        </h3>
 
-<label for="">Article</label>
-<input class="url-or-keyword" type="text" placeholder="URL or search Google">
-    
-<button>Preview</button>
-    
-<button class="google-news-btn">Google News</button>
-    
-<div class="article-one-container">
-    <h3>  
-       <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).title %> 
-    </h3>
+        <div>
+            <img src="<%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).image_url %>">
+        </div>
 
-    <div>
-        <img src="<%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).image_url %>">
+        <div> 
+            <p>       
+                <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_description %>
+            </p>
+            <a href="<%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_url %>" target="_blank">
+                <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_url %>
+            </a>    
+        </div>
     </div>
 
-    <div> 
-        <p>       
-            <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_description %>
-        </p>
-        <a href="<%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_url %>" target="_blank">
-            <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).article_url %>
-        </a>    
-    </div>
-</div>
-
-<br><br>
-    
-<div class="news-container"></div>
-
+    <br><br>
+        
+    <div class="news-container"></div>
+</main>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
