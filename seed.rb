@@ -14,19 +14,19 @@ require_relative 'models/notification.rb'
 test_users = [
   {
     :display_name => 'Milo',
-    :avatar =>'http://via.placeholder.com/100',
+    :avatar =>'https://via.placeholder.com/100',
     :email => 'milo@test.com',
     :password => '123'
   },
   {
     :display_name => 'Roisin',
-    :avatar => 'http://via.placeholder.com/100',
+    :avatar => 'https://via.placeholder.com/100',
     :email => 'roisin@test.com',
     :password => '123'
   },
   {
     :display_name => 'Alan',
-    :avatar => 'http://via.placeholder.com/100',
+    :avatar => 'https://via.placeholder.com/100',
     :email => 'alan@test.com',
     :password => '123'
   }
