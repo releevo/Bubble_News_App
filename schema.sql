@@ -20,6 +20,7 @@ create table stories(
     id SERIAL PRIMARY KEY,
     title VARCHAR(500),
     creator_id INTEGER,
+    time_created TIMESTAMP,
     FOREIGN KEY (creator_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
@@ -49,18 +50,19 @@ create table articles(
 
 create table discussions(
     id SERIAL PRIMARY KEY,
-    content TEXT,
+    content TEXT NOT NULL,
     user_id INTEGER,
     story_id INTEGER,
+    time_created TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (story_id) REFERENCES stories (id) ON DELETE CASCADE
 );
 
 create table votes(
     id SERIAL PRIMARY KEY,
-    number INTEGER,
     user_id INTEGER,
     article_id INTEGER,
+    story_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE CASCADE
 );
@@ -73,5 +75,6 @@ create table notifications(
     article_id INTEGER,
     notification_type VARCHAR(500),
     seen BOOLEAN,
+    time_created TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE
 );
