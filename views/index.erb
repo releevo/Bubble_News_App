@@ -30,9 +30,9 @@
         <article class="story">
         <h1 class="story-title">
         <%= topic.story_with_most_votes[:title]%></h1>
-        <h1 class="article-title"><%=topic.article_of_most_votes%></h1>
+        <h1 class="article-title"></h1>
         <img src="" alt="" class="story-thumb">
-        <p class="article-content"><%=topic.article_of_most_votes%></p>
+        <p class="article-content"></p>
         </article>    
     </div>
     <% end %>
@@ -40,5 +40,7 @@
     </main>
 </div>
 
+<%# <%=topic.article_of_most_votes[:title]%> 
+<%# <%=stories.article_of_most_votes%>
 <%# <%=topic.article_related_to_story_with_most_votes[:title]%>
 <%# <%=topic.article_related_to_story_with_most_votes[:article_description]%>

@@ -20,9 +20,5 @@ class Topic < ActiveRecord::Base
         story_votes.empty? ? {title: "no story"} : @last_story
     end
 
-    def article_of_most_votes
-        articles.count
-    end
-
     
 end

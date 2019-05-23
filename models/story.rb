@@ -7,7 +7,7 @@ class Story < ActiveRecord::Base
   end
 
   # def article_of_most_votes
-  #   articles[:id]
+  #   Article.where(story_id: story.id).last
   # end
   
   
