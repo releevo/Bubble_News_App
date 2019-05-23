@@ -10,51 +10,52 @@
   <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Lato&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="wrapper">
+    <header>
+      <% if logged_in? %>
+      <div class="profile">
+        <img class="avatar" src="<%= current_user.avatar.url %>" alt="">
+        <span class="display-name"><%= current_user.display_name %></span>
+      </div>
+      <% end %>
 
-  <header>
-    <% if logged_in? %>
-    <div class="profile">
-      <img class="avatar" src="<%= current_user.avatar.url %>" alt="">
-      <span class="display-name"><%= current_user.display_name %></span>
-    </div>
-    <% end %>
+      <h1>
+        <a href="/">Bubbles</a>
+      </h1>
 
-    <h1>
-      <a href="/">Bubbles</a>
-    </h1>
+      <% if logged_in? %>
+      <ul class="nav">
+        <li>
+          <a href="/new">Add Story</a
+        ></li>
+        <li>
+          <a class="notification" href="/users/<%= current_user.id %>">
+            <div class="notification-count"><%= Notification.where(receiver_id: current_user.id).count %></div>
+            <span class="invitation">Invitations</span>
+          </a>
+        </li>
+        <li>
+          <form action="/session" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button class="logout">Log Out</button>
+          </form>
+        </li>
+      </ul>
+      <% else %>
+      <ul class="nav">
+        <li>
+          <a href="/login">Login</a>
+        </li>
+        <li>
+          <a href="/signup">Sign Up</a>
+        </li>
+      </ul>
+      <% end %>
+    </header>
+          
+    <%= yield %>
 
-    <% if logged_in? %>
-    <ul class="nav">
-      <li>
-        <a href="/new">Add Story</a
-      ></li>
-      <li>
-        <a class="notification" href="/users/<%= current_user.id %>">
-          <div class="notification-count"><%= Notification.where(receiver_id: current_user.id).count %></div>
-          <span class="invitation">Invitations</span>
-        </a>
-      </li>
-      <li>
-        <form action="/session" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <button class="logout">Log Out</button>
-        </form>
-      </li>
-    </ul>
-    <% else %>
-    <ul class="nav">
-      <li>
-        <a href="/login">Login</a>
-      </li>
-      <li>
-        <a href="/signup">Sign Up</a>
-      </li>
-    </ul>
-    <% end %>
-  </header>
-        
-  <%= yield %>
-
-  <footer></footer>
+    <footer></footer>
+  </div>
 </body>
 </html>
