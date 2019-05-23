@@ -32,6 +32,11 @@ body {
     font-family: 'Alfa Slab One', cursive;
 }
 
+.container h3 {
+    font-size: 1.1em;
+    font-family: 'Alfa Slab One', cursive;
+}
+
 /* Global Styles - applies to all elements on all pages */
 
 .bright {
@@ -45,8 +50,8 @@ body {
 }
 
 .dark {
-    border: 1px solid black;
-    background-color: black;
+    border: 1px solid grey;
+    background-color: grey;
 }
 
 .profile {

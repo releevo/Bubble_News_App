@@ -13,12 +13,11 @@
   </header>
 
   <main>
-  
+  <div class="sides">
+    <div class="container medium pick-side">This Side</div>
+    <div class="container dark pick-side">That Side </div>
+  </div>
     <div class="container story-articles medium">
-
-      <div class="pick-side">This</div>
-      <div class="pick-side">That</div>
-
         <article class="story-article original">
           <h2 class="title"><%= @article_original_title %></h2>
           <img src="<%= @article_original.image_url %>" alt="" class="story-thumb">
@@ -33,7 +32,7 @@
         <article class="story-article perspective hide">
         <% if @article_original != @article_perspective %>
           <h2 class="title"><%= @article_perspective_title %></h2>
-          <img src="" alt="" class="story-thumb">
+          <img src="<%= @article_perspective.image_url %>" alt="" class="story-thumb">
           <div class="article-content">
             <em><%= @article_perspective_author %></em>
             <%= @article_perspective_content %>
@@ -98,9 +97,13 @@
   display: none;
 }
 
-.pickside {
+.sides {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.pick-side {
+  margin-bottom: 0;
 }
 
 .discussion {
@@ -133,11 +136,17 @@
   var articlePerspective = document.querySelector('.perspective')
 
   var handleViewOriginal = event => {
+    viewOriginal.classList.remove('dark')
+    viewOriginal.classList.add('medium')
+    viewPerspective.classList.add('dark')
     articleOriginal.classList.remove('hide')
     articlePerspective.classList.add('hide')
   }
 
   var handleViewPerspective = event => {
+    viewPerspective.classList.remove('dark')
+    viewPerspective.classList.add('medium')
+    viewOriginal.classList.add('dark')
     articleOriginal.classList.add('hide')
     articlePerspective.classList.remove('hide')
   }
