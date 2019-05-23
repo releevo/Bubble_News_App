@@ -33,19 +33,19 @@ post '/new' do
   stories_article.contributor_id = current_user.id
   stories_article.save
 
-  10.times do
+ 10.times do
     notification = Notification.new
     notification.sender_id = current_user.id
     topic_selection = Topic.where.not(user_id: current_user.id).where(name: topic.name)
     first_notice = topic_selection.sample
-    notification.receiver_id = first_notice.user_id
+    notification.receiver_id = first_notice[:user_id]
     notification.story_id = story.id
     notification.article_id = article.id
     notification.notification_type = "invite"
     notification.seen = false
 
     notification.save
-  end
+  end 
 
   # erb :index
   # redirect "/stories/#{story.id}"
