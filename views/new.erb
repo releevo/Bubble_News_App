@@ -81,6 +81,12 @@
                     article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
                     article_description: event.target.closest('.article-container').querySelector('p').textContent,
                     article_image_url: event.target.closest('.article-container').querySelector('.article-image').src
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.redirect !== undefined && res.redirect) {
+                        window.location.href = res.redirect_url
+                    }
                 }
             })
         }  

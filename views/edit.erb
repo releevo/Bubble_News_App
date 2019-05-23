@@ -102,15 +102,22 @@
         var handleChooseArticle = function(event) {
             if(event.target.classList.contains('choose-btn')) { // find the 'choose' button
                 $.ajax({
-                    url: '/new',
+                    url: '/edit',
                     method: 'post',
                     data: {
-                        story_title: getStoryTitle.value,
-                        chosen_topics: chosenTopics,
+                        // story_title: getStoryTitle.value,
+                        // chosen_topics: chosenTopics,
+                        story_id: <%= params[:id] %>,
                         article_title: event.target.closest('.article-container').querySelector('h3').textContent,
                         article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
                         article_description: event.target.closest('.article-container').querySelector('p').textContent,
                         article_image_url: event.target.closest('.article-container').querySelector('.article-image').src
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.redirect !== undefined && res.redirect) {
+                            window.location.href = res.redirect_url
+                        }
                     }
                 })
             }  
