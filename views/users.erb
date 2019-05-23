@@ -30,15 +30,14 @@ var ignoreButton = document.querySelector('.users-ignore-button')
 var inviteCard = document.querySelector('.invite-card')
 
 var handleIgnoreClick = function(event) {
-  debugger
   event.preventDefault();
   var url = event.target.closest('form').action
   var toDelete = event.target.closest('.invite-card')
   $.ajax({
-    url: url
+    url: url,
     method: "delete"
   }).done(response => {
-    // toDelete.remove()
+    toDelete.remove()
   })
 
 }
