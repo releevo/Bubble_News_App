@@ -39,7 +39,9 @@
           <span class="vote-btn" data-article-id="<%= @article_perspective.id %>">👍</span>
         <% else %>
           <h2 class="title">This article needs your perspective.</h2>
-          <button class="article-btn">Add Article</button>
+          <form action="/stories/<%= @story.id %>/edit" method="get">
+            <button class="article-btn">Add Article</button>
+          </form>
         <% end %>
         </article>
     </div>
