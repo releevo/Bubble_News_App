@@ -26,7 +26,7 @@
             <%= @article_original_content %>
           </div>
           <span class="vote-count"><%= @votes_original %></span>
-          <span class="vote-btn" data-article-id="<%= @article_original.id %>">👍</span>
+          <span class="vote-btn" data-article-id="<%= @article_original.id %>" data-story-id="<%= @story.id %>">👍</span>
         </article>
 
         <article class="story-article perspective hide">
@@ -38,7 +38,7 @@
             <%= @article_perspective_content %>
           </div>
           <span class="vote-count"><%= @votes_perspective %></span>
-          <span class="vote-btn" data-article-id="<%= @article_perspective.id %>">👍</span>
+          <span class="vote-btn" data-article-id="<%= @article_perspective.id %>" data-story-id="<%= @story.id %>">👍</span>
         <% else %>
           <h2 class="title">This article needs your perspective.</h2>
           <form action="/stories/<%= @story.id %>/edit" method="get">
@@ -165,8 +165,8 @@
         url: '/api/votes',
         method: 'post',
         data: {
-          article_Id: event.target.dataset.articleId
-          // story_Id: event.target.dataset.story_Id
+          article_id: event.target.dataset.articleId,
+          story_id: event.target.dataset.storyId
         }
       }).done(res => {
         var storyArticle = event.target.closest('.story-article')
