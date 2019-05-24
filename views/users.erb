@@ -26,8 +26,7 @@ integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 crossorigin="anonymous"></script>
 
 <script>
-var ignoreButton = document.querySelector('.users-ignore-button')
-var inviteCard = document.querySelector('.invite-card')
+var ignoreButtons = document.querySelectorAll('.users-ignore-button')
 
 var handleIgnoreClick = function(event) {
   event.preventDefault();
@@ -42,5 +41,5 @@ var handleIgnoreClick = function(event) {
 
 }
 
-ignoreButton.addEventListener('click', handleIgnoreClick)
+ignoreButtons.forEach(i => i.addEventListener('click', handleIgnoreClick))
 </script>
