@@ -170,8 +170,8 @@ header .profile {
 }
 
 .article-container, .article-one-container {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
 }
 
 .article-one-container img {

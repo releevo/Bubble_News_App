@@ -33,19 +33,24 @@ post '/new' do
   stories_article.contributor_id = current_user.id
   stories_article.save
 
- 10.times do
+
+  # get all user ids with a connection
+  # limit 10
+  # pluck user_id
+  # each
+
+  topic_selection = Topic.where.not(user_id: current_user.id).where(name: topic.name).limit(10).pluck(:user_id)
+  topic_selection.each do |user_id|
     notification = Notification.new
     notification.sender_id = current_user.id
-    topic_selection = Topic.where.not(user_id: current_user.id).where(name: topic.name)
-    first_notice = topic_selection.sample
-    notification.receiver_id = first_notice[:user_id]
+    notification.receiver_id = user_id
     notification.story_id = story.id
     notification.article_id = article.id
     notification.notification_type = "invite"
     notification.seen = false
-
+    notification.time_created = Time.now
     notification.save
-  end 
+  end
 
   # erb :index
   # redirect "/stories/#{story.id}"
