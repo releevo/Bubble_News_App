@@ -21,13 +21,12 @@
     </div>
 
     <label for="">Article</label>
-    <input class="url-or-keyword" type="text" placeholder="URL or search Google">
-    <button>Preview</button>
+    <input class="url-or-keyword" type="text" placeholder="Search Google">
     <button class="google-news-btn">Google News</button>
         
     <div class="article-one-container">
         <h3>  
-        <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).title %> 
+            <%= Article.find(StoriesArticle.find_by(story_id: params[:id]).article_id).title %> 
         </h3>
 
         <div>
