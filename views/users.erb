@@ -9,7 +9,7 @@
     <h2 class="story-title"><%= notice.sender_story.title%></h2>
     <h2 class="article-title"><%= notice.sender_article.title%></h2>
     <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time"><%= time_ago_in_words(notice.time_created)%> ago</span>
-    <form action="/stories/<%= notice.sender_story.id%>/edit" method="get">
+    <form action="/stories/<%= notice.story_id%>/edit" method="get">
       <button>Accept</button>
     </form>
     <form action="/api/notifications/<%= notice.id%>" method="post">
