@@ -16,9 +16,10 @@ class Topic < ActiveRecord::Base
         }.sort_by { |story|
             story[:votes]
         }
-        # @last_story = 
-        story_votes.empty? ? false : story_votes.last[:story]
+        story_votes.empty? ? false  : story_votes.last[:story]
     end
 
-    
 end
+
+# false
+# {title: "no story"}
