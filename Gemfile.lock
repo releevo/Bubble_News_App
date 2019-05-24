@@ -16,16 +16,24 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     concurrent-ruby (1.1.5)
+    fastimage (2.1.5)
+    guess_html_encoding (0.0.11)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
+    mini_portile2 (2.4.0)
     minitest (5.11.3)
     mustermann (1.0.3)
+    nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
+    ruby-readability (0.7.0)
+      guess_html_encoding (>= 0.0.4)
+      nokogiri (>= 1.6.0)
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -43,6 +51,8 @@ DEPENDENCIES
   active_helper
   bcrypt
   carrierwave
+  fastimage
+  ruby-readability
   sinatra
 
 BUNDLED WITH
