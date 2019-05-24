@@ -155,27 +155,28 @@ header .profile {
 }
 
 .topics-container {
-    margin: 10px 0 10px 0; 
+    /* margin: 10px 0 10px 0;  */
+    /* display: flex; */
+}
+
+.topics-container-first-row, .topics-container-second-row {
     display: flex;
 }
 
-.topics-container div {
+.topics-container-first-row div, .topics-container-second-row div {
     border: 1px solid black;
     cursor: pointer;
     margin: 5px;
-}
+} 
 
-.news-container img {
-    width: 400px;
+.news-container img, .article-one-container img {
+    width: 100%;
 }
 
 .article-container, .article-one-container {
-    /* display: flex; */
-    /* justify-content: center; */
-}
-
-.article-one-container img {
-    width: 400px;
+    border: 1px solid black;
+    margin-top: 15px; 
+    text-align: center;
 }
 
 .selectedTopics {
