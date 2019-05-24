@@ -27,13 +27,17 @@
     <%topic.story_with_most_votes%>
     <div class="ui-card">
         <div class="topic"><%=topic.name%></div>
-        <article class="story">
-        <h1 class="story-title">
-        <%= topic.story_with_most_votes[:title]%></h1>
-        <h1 class="article-title"></h1>
-        <img src="" alt="" class="story-thumb">
-        <p class="article-content"></p>
-        </article>    
+        <% if topic.story_with_most_votes %>
+            <article class="story">
+            <h1 class="story-title">
+            <%= topic.story_with_most_votes[:title]%></h1>
+            <h1 class="article-title"><%= topic.story_with_most_votes.articles[0][:title] %></h1>
+            <img src="<%=topic.story_with_most_votes.articles[0][:image_url] %>" alt="" class="story-thumb">
+            <p class="article-content"><%=topic.story_with_most_votes.articles[0][:article_description] %></p>
+            </article>
+        <% else %>
+            <div>No Stories</div>
+        <% end %>
     </div>
     <% end %>
 
