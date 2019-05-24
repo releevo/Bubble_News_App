@@ -33,6 +33,11 @@ post '/new' do
   stories_article.contributor_id = current_user.id
   stories_article.save
 
+  stories_topic = StoriesTopic.new
+  stories_topic.topic_id = topic.id
+  stories_topic.story_id = story.id
+  stories_topic.save
+
 
   # get all user ids with a connection
   # limit 10
