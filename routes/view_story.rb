@@ -28,7 +28,8 @@ get '/stories/:id' do
   @votes_original = Vote.where(article_id: @article_original.id).count
   @votes_perspective = Vote.where(article_id: @article_perspective.id).count
   @perspective_user = User.find(@article_perspective.user_id)
-  @discussions = Discussion.where(story_id: @story.id)
+  @comments = Comment.where(story_id: @story.id)
+  binding.pry
   erb :show
 end
 
@@ -46,12 +47,12 @@ post '/api/votes' do
   end
 end
 
-post '/discussions' do
-  @discussion = Discussion.new
-  @discussion.time_created = Time.now
-  @discussion.user_id = current_user.id
-  @discussion.content = params[:content]
-  @discussion.story_id = params[:story_id]
-  @discussion.save
-  redirect "/stories/#{@discussion.story_id}"
+post '/comments' do
+  @comment = Comment.new
+  @comment.time_created = Time.now
+  @comment.user_id = current_user.id
+  @comment.content = params[:content]
+  @comment.story_id = params[:story_id]
+  @comment.save
+  redirect "/stories/#{@comment.story_id}"
 end
