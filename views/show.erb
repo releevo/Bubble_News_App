@@ -48,19 +48,19 @@
         </article>
     </div>
 
-    <h2>Discussions</h2>
+    <h2>Comments</h2>
     <div class="container bright comments">
-    <% @discussions.each  do |discussion| %>
-      <div class="discussion">
+    <% @comments.each  do |comment| %>
+      <div class="comment">
         <div class="profile">
-          <img class="avatar" src="<%= User.find(discussion.user_id).avatar %>" alt="">
-          <span class="display-name"><%= User.find(discussion.user_id).display_name %></span>
+          <img class="avatar" src="<%= User.find(comment.user_id).avatar %>" alt="">
+          <span class="display-name"><%= User.find(comment.user_id).display_name %></span>
         </div>
-        <p class="content"><%= discussion.content %></p>
+        <p class="content"><%= comment.content %></p>
       </div>
     <% end %>
       <% if logged_in? %>
-      <form class="add-comment" action="/discussions" method="post">
+      <form class="add-comment" action="/comments" method="post">
         <input type="hidden" name="story_id" value="<%= @story.id %>">
         <h3>Add a Comment</h3>
         <textarea name="content"></textarea>
