@@ -15,6 +15,7 @@ post '/new' do
     stories_topic = StoriesTopic.new
     stories_topic.topic_id = chosen_topic_id
     stories_topic.story_id = story.id
+    stories_topic.save
   end
 
   #these params need to be updated as per the URL search Alan
