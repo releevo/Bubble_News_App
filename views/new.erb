@@ -11,13 +11,13 @@
     <div class="topics-container">
         <label for="">Topics</label>
         <input type="checkbox" class="topics" data-topic-id=1 name="politics" value="politics">Politics<br>
-        <input type="checkbox" class="topics" data-topic-id=2 name="sports" value="sports">Sports<br>
-        <input type="checkbox" class="topics" data-topic-id=3 name="science" value="science">Science<br>
-        <input type="checkbox" class="topics" data-topic-id=4 name="culture" value="culture">Culture<br>
-        <input type="checkbox" class="topics" data-topic-id=5 name="environment" value="environment">Environment<br>
-        <input type="checkbox" class="topics" data-topic-id=6 name="entertainment" value="entertainment">Entertainment<br>
-        <input type="checkbox" class="topics" data-topic-id=7 name="Economy" value="economy">Economoy<br>
-        <input type="checkbox" class="topics" data-topic-id=8 name="society" value="society">Society<br>
+        <input type="checkbox" class="topics" data-topic-id=6 name="sports" value="sports">Sports<br>
+        <input type="checkbox" class="topics" data-topic-id=4 name="science" value="science">Science<br>
+        <input type="checkbox" class="topics" data-topic-id=5 name="culture" value="culture">Culture<br>
+        <input type="checkbox" class="topics" data-topic-id=3 name="environment" value="environment">Environment<br>
+        <input type="checkbox" class="topics" data-topic-id=8 name="entertainment" value="entertainment">Entertainment<br>
+        <input type="checkbox" class="topics" data-topic-id=2 name="Economy" value="economy">Economoy<br>
+        <input type="checkbox" class="topics" data-topic-id=7 name="society" value="society">Society<br>
     </div>
 
     <label for="">Article</label>
@@ -37,8 +37,7 @@
     var getTopics = document.querySelectorAll('#topic')
 
 
-    let chosenTopics = document.querySelectorAll('.topics:checked')
-    let chosenTopicsIds = Array.from(chosenTopics).map(topic => topic.getAttribute('data-topic-id'))
+    
 
 
     var handleSearchGoogleNews = function(event) {    
@@ -70,6 +69,8 @@
 
     // click anywhere in news-container div
     var handleChooseArticle = function(event) {
+        let chosenTopics = document.querySelectorAll('.topics:checked')
+        let chosenTopicsIds = Array.from(chosenTopics).map(topic => topic.getAttribute('data-topic-id'))
         if(event.target.classList.contains('choose-btn')) { // find the 'choose' button
             $.ajax({
                 url: '/new',
