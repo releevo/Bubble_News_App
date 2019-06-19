@@ -10,19 +10,14 @@
     
     <div class="topics-container">
         <label for="">Topics</label>
-        <div class="topics-container-first-row">
-            <div id="topic">Politics</div>
-            <div id="topic">Sports</div>
-            <div id="topic">Science</div>
-            <div id="topic">Culture</div>
-            <div id="topic">Environment</div>
-        </div>
-
-        <div class="topics-container-second-row">
-            <div id="topic">Entertainment</div>
-            <div id="topic">Economy</div>
-            <div id="topic">Society</div>
-        </div>
+        <input type="checkbox" class="topics" data-topic-id=1 name="politics" value="politics">Politics<br>
+        <input type="checkbox" class="topics" data-topic-id=2 name="sports" value="sports">Sports<br>
+        <input type="checkbox" class="topics" data-topic-id=3 name="science" value="science">Science<br>
+        <input type="checkbox" class="topics" data-topic-id=4 name="culture" value="culture">Culture<br>
+        <input type="checkbox" class="topics" data-topic-id=5 name="environment" value="environment">Environment<br>
+        <input type="checkbox" class="topics" data-topic-id=6 name="entertainment" value="entertainment">Entertainment<br>
+        <input type="checkbox" class="topics" data-topic-id=7 name="Economy" value="economy">Economoy<br>
+        <input type="checkbox" class="topics" data-topic-id=8 name="society" value="society">Society<br>
     </div>
 
     <label for="">Article</label>
@@ -42,7 +37,8 @@
     var getTopics = document.querySelectorAll('#topic')
 
 
-    var chosenTopics = ""
+    let chosenTopics = document.querySelectorAll('.topics:checked')
+    let chosenTopicsIds = Array.from(chosenTopics).map(topic => topic.getAttribute('data-topic-id'))
 
 
     var handleSearchGoogleNews = function(event) {    
@@ -80,7 +76,7 @@
                 method: 'post',
                 data: {
                     story_title: getStoryTitle.value,
-                    chosen_topics: chosenTopics,
+                    chosen_topics: chosenTopicsIds,
                     article_title: event.target.closest('.article-container').querySelector('h3').textContent,
                     article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
                     article_description: event.target.closest('.article-container').querySelector('p').textContent,
@@ -99,20 +95,20 @@
     setNewsContainer.addEventListener('click', handleChooseArticle)
 
 
-    var handleSelectTopics = function (event) {
-        event.target.classList.add('selectedTopics')
-        if(event.target.classList.contains('selectedTopics')) {
-            if(chosenTopics == "") {
-                chosenTopics = event.target.textContent
-            } else {
-                chosenTopics = chosenTopics + " " + event.target.textContent
-            }
-        }
-    }
+    // var handleSelectTopics = function (event) {
+    //     event.target.classList.add('selectedTopics')
+    //     if(event.target.classList.contains('selectedTopics')) {
+    //         if(chosenTopics == "") {
+    //             chosenTopics = event.target.textContent
+    //         } else {
+    //             chosenTopics = chosenTopics + " " + event.target.textContent
+    //         }
+    //     }
+    // }
 
-    getTopics.forEach(function(item) {
-        item.addEventListener('click', handleSelectTopics)
-    })
+    // getTopics.forEach(function(item) {
+    //     item.addEventListener('click', handleSelectTopics)
+    // })
 
     searchGoogleNews.addEventListener('click', handleSearchGoogleNews)
 </script>
