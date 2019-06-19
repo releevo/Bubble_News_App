@@ -12,7 +12,7 @@ create table users_topics (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     topic_id INTEGER NOT NULL
-)
+);
 
 create table topics(
     id SERIAL PRIMARY KEY,
