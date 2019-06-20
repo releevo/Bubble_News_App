@@ -7,9 +7,10 @@
   <div class="invite-card">
     <img src="<%= notice.sender.avatar %>" alt="" class="host-avatar">
     <h2 class="story-title"><%= notice.sender_story.title%></h2>
-    <h2 class="article-title"><%= notice.sender_article.title%></h2>
+    <h2 class="article-title"><%= notice.article_title%></h2>
     <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time"><%= time_ago_in_words(notice.time_created)%> ago</span>
     <form action="/stories/<%= notice.story_id%>/edit" method="get">
+      <input type="hidden" name="notice" value="<%=notice.id%>">
       <button>Accept</button>
     </form>
     <form action="/api/notifications/<%= notice.id%>" method="post">
@@ -27,6 +28,7 @@ crossorigin="anonymous"></script>
 
 <script>
 var ignoreButtons = document.querySelectorAll('.users-ignore-button')
+var notificationCounter = document.querySelector('.notification-count')
 
 var handleIgnoreClick = function(event) {
   event.preventDefault();
@@ -37,6 +39,7 @@ var handleIgnoreClick = function(event) {
     method: "delete"
   }).done(response => {
     toDelete.remove()
+    notificationCounter.textContent = Number(notificationCounter.textContent) - 1
   })
 
 }

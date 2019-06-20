@@ -1,10 +1,11 @@
 # complete story
 
 get '/stories/:id/edit' do
-  # notice = Notification.where(story_id: params[:id]).first
-  # if current_user.id == notice[:receiver_id]
-  #   notice.seen = true
-  # end
+  notice = Notification.find(params[:notice])
+  if current_user.id == notice.receiver_id
+    notice.seen = true
+    notice.save
+  end
   erb :edit
 end
 
