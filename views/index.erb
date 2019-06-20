@@ -1,51 +1,33 @@
-<div class="home-container">
+<div class="container home">
+  <header>
     <nav>
-        <ul>
-            <li>Politics</li>
-            <li>Economy</li>
-        </ul>
-        <ul>
-            <li>Environment</li>
-            <li>Science</li>
-        </ul>
-        <ul>
-            <li>Culture</li>
-            <li>Sport</li>
-        </ul>
-        <ul>
-            <li>Society</li>
-            <li>Entertainment</li>
-        </ul>
+      <ul>
+        <li>Politics</li>
+        <li>Economy</li>
+        <li>Environment</li>
+        <li>Science</li>
+        <li>Culture</li>
+        <li>Society</li>
+        <li>Entertainment</li>
+      </ul>
     </nav>
+  </header>
 
+	<main>
 
-    
-    <%# puts topic.story_with_most_votes[:title] %>
+		<% @topics.each do |topic| %>
+			<section class="<%= topic.name %>">
+			<h2 class="topic"><%= topic.name %></h2>
+			<% if topic.stories_topics != [] %>
+				<span>Story: <%= topic.story_with_most_votes.title %></span>
+				<h3><%= topic.story_most_votes_article.title %></h3>
+				<p><%= topic.story_most_votes_article.article_description %></p>
+			<% else %>
+				<span>This topic does not contain any stories.</span>
+			<% end %>
+			</section>
+		<% end %>
 
-    <main>
-    <%@topics.each do |topic| %>
-    <%topic.story_with_most_votes%>
-    <div class="ui-card">
-        <div class="topic"><%=topic.name%></div>
-        <% if topic.story_with_most_votes%>
-            <article class="story">
-            <h1 class="story-title">
-            <%= topic.story_with_most_votes[:title]%></h1>
-            <h1 class="article-title"><%= topic.story_with_most_votes.articles[0][:title] %> </h1>
-            <img src="<%=topic.story_with_most_votes.articles[0][:image_url] %>" alt="" class="story-thumb">
-            <p class="article-content"><%=topic.story_with_most_votes.articles[0][:article_description]%></p>
-            </article>
-        <% else %>
-            <div>No Stories</div>
-        <% end %>
-    </div>
-    <% end %>
+	</main>
 
-    </main>
 </div>
-
-
-<%# <%=topic.article_of_most_votes[:title]%> 
-<%# <%=stories.article_of_most_votes%>
-<%# <%=topic.article_related_to_story_with_most_votes[:title]%>
-<%# <%=topic.article_related_to_story_with_most_votes[:article_description]%>
