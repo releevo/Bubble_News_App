@@ -39,18 +39,23 @@ post '/new' do
   # pluck user_id
   # each
 
-  # topic_selection = UsersTopic.where.not(user_id: current_user.id).where(name: topic.name).limit(10).pluck(:user_id)
-  # topic_selection.each do |user_id|
-  #   notification = Notification.new
-  #   notification.sender_id = current_user.id
-  #   notification.receiver_id = user_id
-  #   notification.story_id = story.id
-  #   notification.article_id = article.id
-  #   notification.notification_type = "invite"
-  #   notification.seen = false
-  #   notification.time_created = Time.now
-  #   notification.save
-  # end
+  params[:chosen_topics].each do |chosen_topic_to_contact|
+    if params[:chosen_topics].length >1
+      users_to_notify = UsersTopic.where.not(user_id: current_user.id).where(topic_id: chosen_topic_to_contact).limit(5).pluck(:user_id)
+    else 
+      users_to_notify = UsersTopic.where.not(user_id: current_user.id).where(topic_id: chosen_topic_to_contact).limit(10).pluck(:user_id)
+    end
+    users_to_notify.each do |user_id|
+      notification = Notification.new
+      notification.sender_id = current_user.id
+      notification.receiver_id = user_id
+      notification.story_id = story.id
+      notification.notification_type = "invite"
+      notification.seen = false
+      notification.time_created = Time.now
+      notification.save
+    end
+  end
 
   # erb :index
   # redirect "/stories/#{story.id}"

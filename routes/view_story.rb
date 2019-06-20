@@ -29,7 +29,6 @@ get '/stories/:id' do
   @votes_perspective = Vote.where(article_id: @article_perspective.id).count
   @perspective_user = User.find(@article_perspective.user_id)
   @comments = Comment.where(story_id: @story.id)
-  binding.pry
   erb :show
 end
 
