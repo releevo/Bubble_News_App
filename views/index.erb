@@ -14,26 +14,20 @@
   </header>
 
 	<main>
-		<section class="politics">
-			<h2>Topic: Politics</h2>
-			<span>Story: <%= @politics_story.title %></span>
-			<h3><%= @politics_article_original.title %></h3>
-			<p><%= @politics_article_original.article_description %></p>
-		</section>
 
-		<section class="economy">
-		
-		</section>
+		<% @topics.each do |topic| %>
+			<section class="<%= topic.name %>">
+			<h2 class="topic"><%= topic.name %></h2>
+			<% if topic.stories_topics != [] %>
+				<span>Story: <%= topic.story_with_most_votes.title %></span>
+				<h3><%= topic.story_most_votes_article.title %></h3>
+				<p><%= topic.story_most_votes_article.article_description %></p>
+			<% else %>
+				<span>This topic does not contain any stories.</span>
+			<% end %>
+			</section>
+		<% end %>
 
-		<section class="environment">
-		
-		</section>
 	</main>
 
 </div>
-
-
-<%# <%=topic.article_of_most_votes[:title]%> 
-<%# <%=stories.article_of_most_votes%>
-<%# <%=topic.article_related_to_story_with_most_votes[:title]%>
-<%# <%=topic.article_related_to_story_with_most_votes[:article_description]%>

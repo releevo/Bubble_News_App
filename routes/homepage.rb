@@ -2,10 +2,17 @@
 
 get '/' do
   @topics = Topic.all
-  @politics = Topic.find(1)
-  @politics_story = @politics.story_with_most_votes
-  @politics_story_articles = @politics_story.stories_articles
-  @politics_article_original = @politics_story_articles.first.article
+
+  # @topics.each do |topic|
+  #   @topic_story = topic.story_with_most_votes
+  #   topic_story_articles = topic_story.stories_articles
+  #   @topic_article_original = topic_story_articles.first.article
+  # end
+
+  # @politics = Topic.find(1)
+  # @politics_story = @politics.story_with_most_votes
+  # @politics_story_articles = @politics_story.stories_articles
+  # @politics_article_original = @politics_story_articles.first.article
   erb :index
 end
 
