@@ -36,7 +36,6 @@ post '/api/votes' do
   if logged_in?
     vote = Vote.new
     vote.article_id = params[:article_id]
-    vote.story_id = params[:story_id]
     vote.user_id = current_user.id
     vote.save
     content_type :json
