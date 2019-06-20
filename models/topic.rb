@@ -9,9 +9,10 @@ class Topic < ActiveRecord::Base
 
     def story_with_most_votes
         story_votes = stories.map { |story|
+            story_articles = story.stories_articles
             {
                 story: story,
-                votes: story.vote_count
+                votes: story_articles.first.article.vote_count + story_articles.last.article.vote_count
             }
         }.sort_by { |story|
             story[:votes]

@@ -1,47 +1,35 @@
-<div class="home-container">
+<div class="container home">
+  <header>
     <nav>
-        <ul>
-            <li>Politics</li>
-            <li>Economy</li>
-        </ul>
-        <ul>
-            <li>Environment</li>
-            <li>Science</li>
-        </ul>
-        <ul>
-            <li>Culture</li>
-            <li>Sport</li>
-        </ul>
-        <ul>
-            <li>Society</li>
-            <li>Entertainment</li>
-        </ul>
+      <ul>
+        <li>Politics</li>
+        <li>Economy</li>
+        <li>Environment</li>
+        <li>Science</li>
+        <li>Culture</li>
+        <li>Society</li>
+        <li>Entertainment</li>
+      </ul>
     </nav>
+  </header>
 
+	<main>
+		<section class="politics">
+			<h2>Topic: Politics</h2>
+			<span>Story: <%= @politics_story.title %></span>
+			<h3><%= @politics_article_original.title %></h3>
+			<p><%= @politics_article_original.article_description %></p>
+		</section>
 
-    
-    <%# puts topic.story_with_most_votes[:title] %>
+		<section class="economy">
+		
+		</section>
 
-    <main>
-    <%@topics.each do |topic| %>
-    <%topic.story_with_most_votes%>
-    <div class="ui-card">
-        <div class="topic"><%=topic.name%></div>
-        <% if topic.story_with_most_votes%>
-            <article class="story">
-            <h1 class="story-title">
-            <%= topic.story_with_most_votes[:title]%></h1>
-            <h1 class="article-title"><%= topic.story_with_most_votes.articles[0][:title] %> </h1>
-            <img src="<%=topic.story_with_most_votes.articles[0][:image_url] %>" alt="" class="story-thumb">
-            <p class="article-content"><%=topic.story_with_most_votes.articles[0][:article_description]%></p>
-            </article>
-        <% else %>
-            <div>No Stories</div>
-        <% end %>
-    </div>
-    <% end %>
+		<section class="environment">
+		
+		</section>
+	</main>
 
-    </main>
 </div>
 
 

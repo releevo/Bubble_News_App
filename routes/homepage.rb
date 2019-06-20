@@ -2,6 +2,10 @@
 
 get '/' do
   @topics = Topic.all
+  @politics = Topic.find(1)
+  @politics_story = @politics.story_with_most_votes
+  @politics_story_articles = @politics_story.stories_articles
+  @politics_article_original = @politics_story_articles.first.article
   erb :index
 end
 
