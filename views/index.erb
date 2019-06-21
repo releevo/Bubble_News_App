@@ -1,22 +1,17 @@
 <div class="container home">
   <header>
-    <nav>
+    <nav class="topics">
       <ul>
-        <li>Politics</li>
-        <li>Economy</li>
-        <li>Environment</li>
-        <li>Science</li>
-        <li>Culture</li>
-        <li>Society</li>
-        <li>Entertainment</li>
+        <% @topics.each do |topic| %>
+					<li data-topic-id="<%= topic.id %>"><%= topic.name %></li>
+				<% end %>
       </ul>
     </nav>
   </header>
 
 	<main>
-
 		<% @topics.each do |topic| %>
-			<section class="<%= topic.name %>">
+			<section class="<%= topic.name %> top-story">
 			<h2 class="topic"><%= topic.name %></h2>
 			<% if topic.stories_topics != [] %>
 				<span>Story: <%= topic.story_with_most_votes.title %></span>
@@ -28,6 +23,58 @@
 			</section>
 		<% end %>
 
+		<section class="topic-stories hide">
+			<script id="topic-stories" type="text/x-handlebars-template">
+				<h2 class="topic">{{topicName}}</h2>
+				{{#if topicHasStories}}
+					<section>
+						{{#each topicStories}}
+							<h2>{{title}}</h2>
+							<h3>{{article.title}}</h3>
+							<p>{{article.article_description}}</p>
+							<img src="{{article.image_url}}" alt="">
+						{{/each}}
+					</section>
+				{{/if}}
+			</script>
+		</section>
 	</main>
 
 </div>
+
+<script>
+	var topicNavLinks = document.querySelectorAll('.topics li')
+	var topStories = document.querySelectorAll('.top-story')
+	var topicStoriesSection = document.querySelector('.topic-stories')
+
+	function handleShowTopicStories (e) {
+		$.ajax({
+			url: '/api',
+			method: 'GET',
+			data: {
+				topic_id: event.target.dataset.topicId
+			}
+		}).done(res => {
+			res.topic_stories.map((story, index) => {
+				story.article = res.topic_stories_articles[index]
+			})
+			renderTopicStories(res)
+		})
+	}
+
+	function renderTopicStories(res) {
+		var source = document.getElementById("topic-stories").innerHTML
+		var template = Handlebars.compile(source)
+		var context = {
+			topicName: res.topic.name,
+			topicHasStories: !(res.topicStories === []),
+			topicStories: res.topic_stories
+		}
+		var html = template(context)
+		topicStoriesSection.innerHTML = html
+		topicStoriesSection.classList.remove('hide')
+		topStories.forEach(topic => topic.classList.add('hide'))
+	}
+
+	topicNavLinks.forEach(link => link.addEventListener('click', handleShowTopicStories))
+</script>
