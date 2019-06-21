@@ -46,14 +46,16 @@ post '/new' do
       users_to_notify = UsersTopic.where.not(user_id: current_user.id).where(topic_id: chosen_topic_to_contact).limit(10).pluck(:user_id)
     end
     users_to_notify.each do |user_id|
-      notification = Notification.new
-      notification.sender_id = current_user.id
-      notification.receiver_id = user_id
-      notification.story_id = story.id
-      notification.notification_type = "invite"
-      notification.seen = false
-      notification.time_created = Time.now
-      notification.save
+      if Notification.where(receiver_id: user_id).where(story_id: story.id) == []
+        notification = Notification.new
+        notification.sender_id = current_user.id
+        notification.receiver_id = user_id
+        notification.story_id = story.id
+        notification.notification_type = "invite"
+        notification.seen = false
+        notification.time_created = Time.now
+        notification.save
+      end
     end
   end
 

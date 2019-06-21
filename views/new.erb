@@ -117,7 +117,7 @@
 
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<%# <script src="https://code.jquery.com/jquery-3.4.1.js"></script> %>
 <script>
     var getUrlOrKeyword = document.querySelector('.url-or-keyword')
     var setNewsContainer = document.querySelector('.news-container')
@@ -166,7 +166,7 @@
                     story_title: getStoryTitle.value,
                     chosen_topics: chosenTopicsIds,
                     article_title: event.target.closest('.article-container').querySelector('h3').textContent,
-                    article_url: event.target.closest('.article-container').querySelector('.article-link').textContent,
+                    article_url: event.target.closest('.article-container').querySelector('.article-link').href,
                     article_description: event.target.closest('.article-container').querySelector('p').textContent,
                     article_image_url: event.target.closest('.article-container').querySelector('.article-image').src
                 },
