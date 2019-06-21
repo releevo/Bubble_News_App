@@ -1,12 +1,16 @@
 # complete story
 
 get '/stories/:id/edit' do
-  notice = Notification.find(params[:notice])
-  if current_user.id == notice.receiver_id
-    notice.seen = true
-    notice.save
+  if params[:notice]
+    notice = Notification.find(params[:notice])
+    if current_user.id == notice.receiver_id
+      notice.seen = true
+      notice.save
+    end
+    erb :edit
+  else
+    erb :edit
   end
-  erb :edit
 end
 
 # do not create story here, find existing story here
