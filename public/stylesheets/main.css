@@ -10,6 +10,10 @@ body {
 
 /* Layout for All Pages */
 
+.hide {
+    display: none;
+}
+
 .wrapper {
     max-width: 425px;
     margin: 0 auto;
@@ -125,14 +129,26 @@ header .profile {
     font-size: 0.5em;
 }
 
-.nav {
-    display: block;
-    text-align: right;
-    margin-left: auto;
+.home header {
+    padding: 0;
 }
 
-.nav li {
+nav {
+    display: block;
+    margin-bottom: 2px;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+nav ul li {
     list-style-type: none;
+    width: 25%;
+    text-align: center;
+    background-color: lightgrey;
+    border: 1px solid white;
 }
 
 .notification-count {
