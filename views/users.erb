@@ -1,25 +1,82 @@
-<header>
-  <h1>Invitations</h1>
-</header>
+<div class="container invitations">
 
-<main class="all-invitations">
-<% @notifications.each do |notice| %>
-  <div class="invite-card">
-    <img src="<%= notice.sender.avatar %>" alt="" class="host-avatar">
-    <h2 class="story-title"><%= notice.sender_story.title%></h2>
-    <h2 class="article-title"><%= notice.article_title%></h2>
-    <span class="host-name"><%= notice.sender.display_name %></span><span class="invite-time"><%= time_ago_in_words(notice.time_created)%> ago</span>
-    <form action="/stories/<%= notice.story_id%>/edit" method="get">
-      <input type="hidden" name="notice" value="<%=notice.id%>">
-      <button>Accept</button>
-    </form>
-    <form action="/api/notifications/<%= notice.id%>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button class="users-ignore-button">Ignore</button>
-    </form>
-  </div>
-  <% end %>
-</main>
+  <header>
+    <h1>Invitations</h1>
+  </header>
+
+  <%if @notifications.count == 0%>
+    <p>There are no new invitations</p>
+  <%else%>
+    <main class="all-invitations">
+      <% @notifications.each do |notice| %>
+        <div class="invite-card bright">
+          <div class="display-flex image-title">
+            <div class="img-container">
+              <img src="<%= notice.sender.avatar %>" alt="" class="avatar">
+            </div>
+            <div>
+              <h2 class="story-title"><%= notice.sender_story.title%></h2>
+              <h3 class="article-title"><%= notice.article_title%></h3>
+            </div>
+          </div>
+          <div class="display-flex actions">
+            <div class="display-flex">
+              <p class="host-name"><%= notice.sender.display_name %></p><p class="invite-time"><%= time_ago_in_words(notice.time_created)%> ago</p>
+            </div>
+            <div class="display-flex">
+              <form action="/stories/<%= notice.story_id%>/edit" method="get">
+                <input type="hidden" name="notice" value="<%=notice.id%>">
+                <button>Accept</button>
+              </form>
+              <form action="/api/notifications/<%= notice.id%>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button class="users-ignore-button">Ignore</button>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      <% end %>
+    </main>
+  <%end%>
+</div>
+
+<style>
+  .invite-card {
+    padding-left: 10px;
+  }
+
+  .display-flex {
+    display: flex;
+    padding-bottom: 10px;
+  }
+
+  .image-title {
+    border-bottom: 1px solid grey;
+    padding-top: 10px;
+  }
+
+  .img-container {
+    width: 30%;
+    padding-top: 10px;
+    padding-right: 10px;
+  }
+
+  .invite-time {
+    border-left: 1px solid grey;
+    padding-left: 5px;
+  }
+
+  .host-name {
+    padding-right: 5px;
+  }
+
+  .actions {
+    padding-top: 10px;
+    justify-content: space-between;
+  }
+
+</style>
 
 <script
 src="https://code.jquery.com/jquery-3.4.1.js"
@@ -46,3 +103,5 @@ var handleIgnoreClick = function(event) {
 
 ignoreButtons.forEach(i => i.addEventListener('click', handleIgnoreClick))
 </script>
+
+
