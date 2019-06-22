@@ -3,50 +3,49 @@
         <h1>Add Story</h1>
     </header>
 
-
     <main>
-      <div class="topic-title">
-        <label for="">Title</label>
-        <input class="story-title"type="text" placeholder="What's this about?">
-      </div>
+        <div class="topic-title">
+            <label for="">Title</label>
+            <input class="story-title"type="text" placeholder="What's this about?">
+        </div>
       
-      <div class="select-topics">
-        <label for="">Topics</label>
-        <div class="topics-container">
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=5 name="culture" value="culture">
-                <label for="" class="medium">Culture</label>
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=2 name="Economy" value="economy">
-                <label for="" class="medium">Economoy</label>
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=8 name="entertainment" value="entertainment">
-                <label for="" class="medium">Entertainment</label>
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=4 name="science" value="science">
-                <label for="" class="medium">Science</label>    
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=1 name="politics" value="politics">
-                <label for="" class="medium">Politics</label>
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=3 name="environment" value="environment">
-                <label for="" class="medium">Environment</label>
-            </div>
-            <div class="each-topic medium">
-                <input type="checkbox" class="topics" data-topic-id=7 name="society" value="society">
-                <label for="" class="medium">Society</label> 
-            </div>
-            <div class="each-topic">
-                <input type="checkbox" class="topics" data-topic-id=6 name="sports" value="sports">
-                <label for="">Sports</label>
+        <div class="select-topics">
+            <label for="">Topics</label>
+            <div class="topics-container">
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=5 name="culture" value="culture">
+                    <label for="" class="medium">Culture</label>
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=2 name="Economy" value="economy">
+                    <label for="" class="medium">Economoy</label>
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=8 name="entertainment" value="entertainment">
+                    <label for="" class="medium">Entertainment</label>
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=4 name="science" value="science">
+                    <label for="" class="medium">Science</label>    
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=1 name="politics" value="politics">
+                    <label for="" class="medium">Politics</label>
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=3 name="environment" value="environment">
+                    <label for="" class="medium">Environment</label>
+                </div>
+                <div class="each-topic medium">
+                    <input type="checkbox" class="topics" data-topic-id=7 name="society" value="society">
+                    <label for="" class="medium">Society</label> 
+                </div>
+                <div class="each-topic">
+                    <input type="checkbox" class="topics" data-topic-id=6 name="sports" value="sports">
+                    <label for="">Sports</label>
+                </div>
             </div>
         </div>
-    </div>
 
         <label for="">Article</label>
         <input class="url-or-keyword" type="text" placeholder="Search Google">
@@ -89,7 +88,7 @@
 
     /* Article Listing CSS */
 
-    .article-container, .article-one-container {
+    .article-container {
         border: 1px solid black;
         margin-top: 15px; 
         margin-right: 10px;
@@ -144,8 +143,8 @@
                         <p>${res.articles[i].description}</p>
                     </div>
                     <div class="choose-link">
-                        <button class="choose-btn">Choose</button><br>
-                        <a class="article-link" href="${res.articles[i].url}" target="_blank">View Full Article</a>
+                        <a class="article-link" href="${res.articles[i].url}" target="_blank">View Full Article</a><br>
+                        <button class="choose-btn">Choose</button>
                     </div>
                 </div>`
             }
