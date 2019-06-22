@@ -1,3 +1,15 @@
+<style>
+  .login-form {
+    text-align: center;
+  }
+
+  .login-form label {
+    display: inline-block;
+    width: 5rem;
+    text-align: left;
+  }
+</style>
+
 <div class="container light login">
 
   <header>
@@ -5,13 +17,21 @@
   </header>
 
   <main>
-    <form action="/session" method="post">
-      <label for="email">Email</label>
-      <input type="text" name="email">
-      <label for="">Password</label>
-      <input type="password" name="password">
-      <button>Login</button>
-    </form>
+    <div class="login-form">
+      <form action="/session" method="post">
+        <div>
+          <label for="email">Email</label>
+          <input type="text" name="email">
+        </div>
+
+        <div>
+          <label for="">Password</label>
+          <input type="password" name="password">        
+        </div>
+
+        <div><button>Login</button></div>
+      </form>
+    </div>
   </main>
 
 </div>
