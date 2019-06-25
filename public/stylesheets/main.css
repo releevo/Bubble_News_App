@@ -1,11 +1,11 @@
-* {
+/* * {
     box-sizing: border-box;
     border: 0.1px dashed grey;
-}
+} */
 
 body {
     font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* Layout for All Pages */
@@ -37,7 +37,7 @@ body {
 }
 
 .container h3 {
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-family: 'Alfa Slab One', cursive;
 }
 
@@ -135,24 +135,6 @@ header .profile {
 
 nav.main {
     margin-left: auto;
-}
-
-nav.topics {
-    display: block;
-    margin-bottom: 2px;
-}
-
-nav.topics ul {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-nav.topics ul li {
-    list-style-type: none;
-    width: 25%;
-    text-align: center;
-    background-color: lightgrey;
-    border: 1px solid white;
 }
 
 .notification-count {

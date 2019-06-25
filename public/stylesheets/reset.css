@@ -36,19 +36,21 @@ h4 {
 
 /* Anchors and Buttons */
 
-/* a,
+a,
 button {
   color: inherit;
   transition: 0.3s;
-} */
-
-/* a:hover {
-  color: grey;
+  text-decoration: none;
 }
 
 a:visited {
+  color: inherit;
+}
+
+/* a:hover {
   color: grey;
 } */
+
 
 
 /* Images */
