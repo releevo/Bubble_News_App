@@ -1,7 +1,7 @@
-/* * {
+* {
     box-sizing: border-box;
-    border: 0.25px dashed grey;
-} */
+    border: 0.1px dashed grey;
+}
 
 body {
     font-family: 'Lato', sans-serif;
@@ -133,17 +133,21 @@ header .profile {
     padding: 0;
 }
 
-nav {
+nav.main {
+    margin-left: auto;
+}
+
+nav.topics {
     display: block;
     margin-bottom: 2px;
 }
 
-nav ul {
+nav.topics ul {
     display: flex;
     flex-wrap: wrap;
 }
 
-nav ul li {
+nav.topics ul li {
     list-style-type: none;
     width: 25%;
     text-align: center;
