@@ -1,51 +1,135 @@
-<div class="home-container">
-    <nav>
-        <ul>
-            <li>Politics</li>
-            <li>Economy</li>
-        </ul>
-        <ul>
-            <li>Environment</li>
-            <li>Science</li>
-        </ul>
-        <ul>
-            <li>Culture</li>
-            <li>Sport</li>
-        </ul>
-        <ul>
-            <li>Society</li>
-            <li>Entertainment</li>
-        </ul>
+<div class="container home">
+  <header>
+    <nav class="topics">
+      <ul>
+        <% @topics.each do |topic| %>
+					<li data-topic-id="<%= topic.id %>"><%= topic.name %></li>
+				<% end %>
+      </ul>
     </nav>
+  </header>
 
+	<main>
+		<% @topics.each do |topic| %>
+			<section class="<%= topic.name %> top-story">
+			<header class="topic-index medium">
+				<h2><%= topic.name %></h2>
+			</header>
+			<article class="story container medium">
+				<% if topic.stories_topics != [] %>
+					<a href="/stories/<%= topic.story_with_most_votes.id %>">
+						<h3>Top Story: <%= topic.story_with_most_votes.title %></h3>
+						<img src="<%= topic.story_most_votes_article.image_url %>" alt="">
+						<h3><%= topic.story_most_votes_article.title %></h3>
+						<p><%= topic.story_most_votes_article.article_description %></p>
+					</a>
+				<% else %>
+					<span>This topic does not contain any stories.</span>
+				<% end %>
+			</article>
+			<hr class="story-divide">
+			</section>
+		<% end %>
 
-    
-    <%# puts topic.story_with_most_votes[:title] %>
-
-    <main>
-    <%@topics.each do |topic| %>
-    <%topic.story_with_most_votes%>
-    <div class="ui-card">
-        <div class="topic"><%=topic.name%></div>
-        <% if topic.story_with_most_votes%>
-            <article class="story">
-            <h1 class="story-title">
-            <%= topic.story_with_most_votes[:title]%></h1>
-            <h1 class="article-title"><%= topic.story_with_most_votes.articles[0][:title] %> </h1>
-            <img src="<%=topic.story_with_most_votes.articles[0][:image_url] %>" alt="" class="story-thumb">
-            <p class="article-content"><%=topic.story_with_most_votes.articles[0][:article_description]%></p>
-            </article>
-        <% else %>
-            <div>No Stories</div>
-        <% end %>
-    </div>
-    <% end %>
-
-    </main>
+		<section class="topic-stories hide">
+		</section>
+	</main>
 </div>
 
+<script id="topic-stories-template" type="text/x-handlebars-template">
+	<header class="topic-index medium">
+		<h2 class="selected-topic-name">{{topicName}}</h2>
+	</header>
+	{{#if topicHasStories}}
+		<article class="story container medium">
+			{{#each topicStories}}
+				<a href="stories/{{id}}">
+					<h3>{{title}}</h3>
+					<img src="{{article.image_url}}" alt="">
+					<h3>{{article.title}}</h3>
+					<p>{{article.article_description}}</p>
+				</a>
+			{{/each}}
+		</article>
+	{{/if}}
+</script>
 
-<%# <%=topic.article_of_most_votes[:title]%> 
-<%# <%=stories.article_of_most_votes%>
-<%# <%=topic.article_related_to_story_with_most_votes[:title]%>
-<%# <%=topic.article_related_to_story_with_most_votes[:article_description]%>
+<script>
+	var topicNavLinks = document.querySelectorAll('.topics li')
+	var topStories = document.querySelectorAll('.top-story')
+	var topicStoriesSection = document.querySelector('.topic-stories')
+
+	function handleShowTopicStories (e) {
+		$.ajax({
+			url: '/api',
+			method: 'GET',
+			data: {
+				topic_id: event.target.dataset.topicId
+			}
+		}).done(res => {
+			res.topic_stories.map((story, index) => {
+				story.article = res.topic_stories_articles[index]
+			})
+			renderTopicStories(res)
+		})
+	}
+
+	function renderTopicStories(res) {
+		var source = $('#topic-stories-template').html()
+		var template = Handlebars.compile(source)
+		var context = {
+			topicName: res.topic.name,
+			topicHasStories: !(res.topicStories === []),
+			topicStories: res.topic_stories
+		}
+		var html = template(context)
+		topicStoriesSection.innerHTML = html
+		topicStoriesSection.classList.remove('hide')
+		topStories.forEach(topic => topic.classList.add('hide'))
+	}
+
+	topicNavLinks.forEach(link => link.addEventListener('click', handleShowTopicStories))
+</script>
+
+<style>
+
+.container.home {
+	margin-top: 2rem;
+}
+
+nav.topics {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+nav.topics ul {
+    display: flex;
+		flex-wrap: wrap;
+}
+
+nav.topics ul li {
+		line-height: 1.75rem;
+    list-style-type: none;
+		width: 25%;
+		height: 30px;
+		text-align: center;
+    background-color: lightgrey;
+    border: 1px solid white;
+}
+
+.topic-index {
+	display: inline-block;
+}
+
+.topic-index h2 {
+	margin: 2px 6px;
+}
+
+.story-divide {
+	width: 75%;
+	height: 0;
+	border: 0.5px solid lightgrey;
+	margin: 0 0 1rem auto;
+}
+
+</style>

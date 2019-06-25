@@ -5,23 +5,25 @@ get '/' do
   erb :index
 end
 
-#Need to find the highest ranked article and display on home page. This is the sum of two votes. Use relationship.
+get '/api' do
+  topic = Topic.find(params[:topic_id])
+  topic_stories = []
+  topic_stories_ids = topic.stories_topics
+  topic_stories_ids.each do |topic| 
+    topic_stories << Story.find(topic.story_id)
+  end
+  topic_stories_articles = []
+  topic_stories.each do |story|
+    topic_stories_articles << story.stories_articles.first.article
+  end
+  content_type :json
+  {
+    topic: topic,
+    topic_stories: topic_stories,
+    topic_stories_articles: topic_stories_articles
+  }.to_json
+end
 
-#Need to get each topic inyp erb
 
-#@story = story where story_id = stories article story_id
-
-#entertainment.story.title
-
-#loop through the topics, retrieve the stories for each topic, retrieve the count of votes for each story
-
-# @politics = Topic.where(name: "Politics")
-  # @economy = Topic.where(name: "Economy")
-  # @environment = Topic.where(name: "Environment")
-  # @science = Topic.where(name: "Sceince")
-  # @culture = Topic.where(name: "Culture")
-  # @sports = Topic.where(name: "Sport")
-  # @society = Topic.where(name: "Society")
-  # @entertainment = Topic.where(name: "Entertainment")
-
-
+# article description
+# article

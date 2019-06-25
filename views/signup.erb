@@ -1,20 +1,123 @@
+<style>
+  .signup-form {
+    /* text-align: center; */
+    padding-left: 2rem;
+  }
+
+  .signup-form label {
+    display: inline-block;
+    width: 9rem;
+    text-align: left;
+  }
+
+  .topics-container {
+    display: grid;
+    grid-template-columns: 100px 100px 130px;
+    grid-template-rows: 30px 30px 30px;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+    background-color: lightgrey;
+  }
+
+  .select-topics, .choose-avatar {
+    display: flex;
+  }
+
+  .each-topic {
+    width: 30%;
+    margin: 2px;
+    display: flex;
+  }
+
+  input[type="checkbox"]:checked + label {
+    border: 1px solid grey;
+    background-color: grey;
+  }
+  
+  .join-now-btn {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+</style>
+
 <div class="container-signup">
   <header>
     <h1>Sign Up</h1>
   </header>
 
   <main>
-    <form action="/signup" class="signup" method="post" enctype="multipart/form-data">
-      <label for="">Display Name: </label>
-      <input type="text" name="display_name">
-      <label for="">Avatar: </label>
-      <input type="file" name="avatar">
-      <label for="">Email: </label>
-      <input type="text" name="email">
-      <label for="">Password: </label>
-      <input type="password" name="password">
-      <button>Join Now</button>
-    </form>
+    <div class="signup-form">
+      <form action="/signup" class="signup" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="">Display Name: </label>
+          <input type="text" name="display_name">        
+        </div>
+
+        <div class="choose-avatar">
+          <div><label for="">Avatar: </label></div>
+          <div><input type="file" name="avatar"></div>      
+        </div>
+        
+        <div>
+          <label for="">Email: </label>
+          <input type="text" name="email">        
+        </div>
+
+        <div>
+          <label for="">Password: </label>
+          <input type="password" name="password">        
+        </div>
+
+        <div class="select-topics">
+          <div><label for="">Interested topics:</label></div>
+          <div class="topics-container">
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Politics">
+              <label for="" class="medium">Politics</label>
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Sport">
+              <label for="" class="medium">Sport</label>          
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Science">
+              <label for="" class="medium">Science</label>
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Culture">
+              <label for="" class="medium">Culture</label>          
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Environment">
+              <label for="" class="medium">Environment</label>
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Entertainment">
+              <label for="" class="medium">Entertainment</label>
+            </div>
+            
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Economy">
+              <label for="" class="medium">Economoy</label>
+            </div>
+
+            <div class="each-topic medium">
+              <input type="checkbox" name="topics_of_interest[]" value="Society">
+              <label for="" class="medium">Society</label>
+            </div>
+          </div>        
+        </div>
+
+        <div class="join-now-btn"><button>Join Now</button></div>
+      </form>
+    </div>
+
   </main>
 </div>
 <%# need to add .url in layout to avatar current_user.avatar %>

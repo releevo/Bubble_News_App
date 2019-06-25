@@ -78,5 +78,5 @@ create table notifications(
     seen BOOLEAN,
     time_created TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (story_id) REFERENCES users (id) ON DELETE CASCADE
+    FOREIGN KEY (story_id) REFERENCES stories (id) ON DELETE CASCADE
 );

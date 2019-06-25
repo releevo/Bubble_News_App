@@ -1,26 +1,27 @@
 # complete story
 
 get '/stories/:id/edit' do
-  notice = Notification.where(story_id: params[:id]).first
-  if current_user.id == notice[:receiver_id]
-    notice.seen = true
+  if params[:notice]
+    notice = Notification.find(params[:notice])
+    if current_user.id == notice.receiver_id
+      notice.seen = true
+      notice.save
+    end
+    erb :edit
+  else
+    erb :edit
   end
-  erb :edit
 end
 
 # do not create story here, find existing story here
 post '/edit' do
 
-  # story = Story.new
-  # story.title = Story.find_by(id: params[:story_id]).title
-  # story.creator_id = Story.find_by(id: params[:story_id]).creator_id
-  # story.save
-
-  # topic = Topic.new
-  # topic.name = params[:chosen_topics]
-  # topic.user_id = current_user.id
-  # topic.story_id = params[:story_id]    
-  # topic.save
+  params[:chosen_topics].each do |chosen_topic_id|
+    stories_topic = StoriesTopic.new
+    stories_topic.topic_id = chosen_topic_id
+    stories_topic.story_id = params[:story_id]
+    stories_topic.save
+  end
 
   article = Article.new
   article.title = params[:article_title]
@@ -32,9 +33,7 @@ post '/edit' do
 
   stories_article = StoriesArticle.new
   stories_article.article_id = article.id
-  stories_article.story_id = params[:story_id]     
-  stories_article.original_side = true
-  stories_article.contributor_id = current_user.id
+  stories_article.story_id = params[:story_id]
   stories_article.save
   
   content_type :json

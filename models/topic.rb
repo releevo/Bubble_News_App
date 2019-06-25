@@ -8,18 +8,32 @@ class Topic < ActiveRecord::Base
     has_many :stories, through: :stories_topics
 
     def story_with_most_votes
-        story_votes = stories.map { |story|
-            {
-                story: story,
-                votes: story.vote_count
-            }
-        }.sort_by { |story|
-            story[:votes]
-        }
-        story_votes.empty? ? false  : story_votes.last[:story]
+			story_votes = stories.map { |story|
+				story_articles = story.stories_articles
+				{
+						story: story,
+						votes: story_articles.first.article.vote_count + story_articles.last.article.vote_count
+				}
+			}.sort_by { |story|
+				story[:votes]
+			}
+			story_votes.empty? ? false  : story_votes.last[:story]
+    end
+
+    def story_most_votes_articles
+				if self.stories_topics == []
+					"Error: there are no stories for this topic." # error handling code goes here
+				else 
+					self.story_with_most_votes.stories_articles
+				end
+    end
+
+		def story_most_votes_article
+			if self.stories_topics == []
+				"Error: there are no stories for this topic." # error handling code goes here
+			else
+				self.story_with_most_votes.stories_articles.first.article
+			end
     end
 
 end
-
-# false
-# {title: "no story"}
