@@ -34,13 +34,9 @@ post '/new' do
   # stories_article.contributor_id = current_user.id
   stories_article.save
 
-  # get all user ids with a connection
-  # limit 10
-  # pluck user_id
-  # each
 
   params[:chosen_topics].each do |chosen_topic_to_contact|
-    if params[:chosen_topics].length >1
+    if params[:chosen_topics].length > 1
       users_to_notify = UsersTopic.where.not(user_id: current_user.id).where(topic_id: chosen_topic_to_contact).limit(5).pluck(:user_id)
     else 
       users_to_notify = UsersTopic.where.not(user_id: current_user.id).where(topic_id: chosen_topic_to_contact).limit(10).pluck(:user_id)
