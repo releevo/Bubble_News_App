@@ -24,23 +24,23 @@
 		<% end %>
 
 		<section class="topic-stories hide">
-			<script id="topic-stories" type="text/x-handlebars-template">
-				<h2 class="topic">{{topicName}}</h2>
-				{{#if topicHasStories}}
-					<section>
-						{{#each topicStories}}
-							<h2>{{title}}</h2>
-							<h3>{{article.title}}</h3>
-							<p>{{article.article_description}}</p>
-							<img src="{{article.image_url}}" alt="">
-						{{/each}}
-					</section>
-				{{/if}}
-			</script>
 		</section>
 	</main>
-
 </div>
+
+<script id="topic-stories-template" type="text/x-handlebars-template">
+	<h2 class="topic">{{topicName}}</h2>
+	{{#if topicHasStories}}
+		<section>
+			{{#each topicStories}}
+				<h2>{{title}}</h2>
+				<h3>{{article.title}}</h3>
+				<p>{{article.article_description}}</p>
+				<img src="{{article.image_url}}" alt="">
+			{{/each}}
+		</section>
+	{{/if}}
+</script>
 
 <script>
 	var topicNavLinks = document.querySelectorAll('.topics li')
@@ -63,7 +63,7 @@
 	}
 
 	function renderTopicStories(res) {
-		var source = document.getElementById("topic-stories").innerHTML
+		var source = $('#topic-stories-template').html()
 		var template = Handlebars.compile(source)
 		var context = {
 			topicName: res.topic.name,
