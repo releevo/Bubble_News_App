@@ -24,6 +24,8 @@ get '/stories/:id' do
   @article_original_author = readability(@article_original.article_url)[:author]
   @article_original_content = readability(@article_original.article_url)[:content]
   @article_perspective = story_articles.last.article
+  @article_perspective_title = readability(@article_perspective.article_url)[:title]
+  @article_perspective_author = readability(@article_perspective.article_url)[:author]
   @article_perspective_content = readability(@article_perspective.article_url)[:content]
   @votes_original = Vote.where(article_id: @article_original.id).count
   @votes_perspective = Vote.where(article_id: @article_perspective.id).count
