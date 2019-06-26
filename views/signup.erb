@@ -21,6 +21,7 @@
 
   .select-topics, .choose-avatar {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .each-topic {
@@ -41,13 +42,13 @@
 
 </style>
 
-<div class="container-signup">
+<div class="container signup">
   <header>
     <h1>Sign Up</h1>
   </header>
 
   <main>
-    <div class="signup-form">
+    <div class="signup-form bright">
       <form action="/signup" class="signup" method="post" enctype="multipart/form-data">
         <div>
           <label for="">Display Name: </label>
@@ -56,7 +57,7 @@
 
         <div class="choose-avatar">
           <div><label for="">Avatar: </label></div>
-          <div><input type="file" name="avatar"></div>      
+          <div><input class="file-upload" type="file" name="avatar"></div>      
         </div>
         
         <div>
