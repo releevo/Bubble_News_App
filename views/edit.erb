@@ -92,6 +92,9 @@
         }
 
         var handleDone = function(res) {
+            setNewsContainer.querySelectorAll('div').forEach(newsArticle => {
+                newsArticle.remove()
+            })
             // array
             for(let i = 0; i < res.articles.length; i++) {
                 var div = document.createElement('div')

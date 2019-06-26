@@ -131,6 +131,9 @@
         }
 
         var handleDone = function(res) {
+            setNewsContainer.querySelectorAll('div').forEach(newsArticle => {
+                newsArticle.remove()
+            })
             // array
             for(let i = 0; i < res.articles.length; i++) {
                 var div = document.createElement('div')
@@ -180,22 +183,6 @@
     }
 
     setNewsContainer.addEventListener('click', handleChooseArticle)
-
-
-    // var handleSelectTopics = function (event) {
-    //     event.target.classList.add('selectedTopics')
-    //     if(event.target.classList.contains('selectedTopics')) {
-    //         if(chosenTopics == "") {
-    //             chosenTopics = event.target.textContent
-    //         } else {
-    //             chosenTopics = chosenTopics + " " + event.target.textContent
-    //         }
-    //     }
-    // }
-
-    // getTopics.forEach(function(item) {
-    //     item.addEventListener('click', handleSelectTopics)
-    // })
 
     searchGoogleNews.addEventListener('click', handleSearchGoogleNews)
 </script>
