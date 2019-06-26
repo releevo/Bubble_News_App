@@ -18,3 +18,8 @@ Some stories have 1 article, some have 2.
 ## Votes
 
 For the 2 topics being demoed, each has a story with highest vote count.
+
+## Issues
+
+- [ ] Sign Up - Economy topic spelled wrong
+- [ ] signup.rb crashed at Line 15 
